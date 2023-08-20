@@ -1,15 +1,9 @@
 import { Suspense } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
+import { lazyImport } from '@/utils/lazyImport';
 
-// import { Spinner } from '@/components/Elements';
-// import { MainLayout } from '@/components/Layout';
-// import { lazyImport } from '@/utils/lazyImport';
-
-// const { DiscussionsRoutes } = lazyImport(
-//   () => import('@/features/discussions'),
-//   'DiscussionsRoutes'
-// );
+const { MagazinesRoutes } = lazyImport(() => import('@/features/magazines'), 'MagazinesRoutes');
 // const { Dashboard } = lazyImport(() => import('@/features/misc'), 'Dashboard');
 // const { Profile } = lazyImport(() => import('@/features/users'), 'Profile');
 // const { Users } = lazyImport(() => import('@/features/users'), 'Users');
@@ -29,6 +23,7 @@ export const protectedRoutes = [
     path: '/app',
     element: <App />,
     children: [
+      { path: '/app/magazines/*', element: <MagazinesRoutes /> },
       // { path: '/discussions/*', element: <DiscussionsRoutes /> },
       // { path: '/users', element: <Users /> },
       // { path: '/profile', element: <Profile /> },
