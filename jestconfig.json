@@ -1,0 +1,12 @@
+{
+  "transform": {
+    "^.+\\.(t|j)sx?$": "ts-jest"
+  },
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+  "testEnvironment": "jsdom",
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+  "collectCoverageFrom": ["./src/**"],
+  "reporters": ["default"],
+  "coverageDirectory": "../coverage",
+  "coverageReporters": ["json", ["lcov", { "projectRoot": "../" }], "text", "cobertura"]
+}
