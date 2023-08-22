@@ -20,7 +20,7 @@ export const Landing = () => {
   };
 
   return (
-    <Paper sx={{ backgroundImage: `url(${Magazine})` }}>
+    <Paper sx={{ backgroundImage: `url(${Magazine})`, backgroundSize: 'cover' }}>
       <Box width="100%" height="100vh" display="flex" justifyContent="center" alignItems="center">
         <Head description="Welcome to Volo Magazine Archive" />
         <Box>
