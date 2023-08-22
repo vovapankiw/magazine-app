@@ -1,34 +1,18 @@
-import { Suspense } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Navigate } from 'react-router-dom';
 import { lazyImport } from '@/utils/lazyImport';
+import Layout from '@/components/Layout/Layout';
 
 const { MagazinesRoutes } = lazyImport(() => import('@/features/magazines'), 'MagazinesRoutes');
-// const { Dashboard } = lazyImport(() => import('@/features/misc'), 'Dashboard');
-// const { Profile } = lazyImport(() => import('@/features/users'), 'Profile');
-// const { Users } = lazyImport(() => import('@/features/users'), 'Users');
-
-const App = () => (
-  <Box>
-    <Suspense
-      fallback={<div className="h-full w-full flex items-center justify-center">Loading...</div>}
-    >
-      <Outlet />
-    </Suspense>
-  </Box>
-);
+const { DashboardRoutes } = lazyImport(() => import('@/features/dashboard'), 'DashboardRoutes');
 
 export const protectedRoutes = [
   {
-    path: '/app',
-    element: <App />,
+    path: 'app',
+    element: <Layout />,
     children: [
-      { path: '/app/magazines/*', element: <MagazinesRoutes /> },
-      // { path: '/discussions/*', element: <DiscussionsRoutes /> },
-      // { path: '/users', element: <Users /> },
-      // { path: '/profile', element: <Profile /> },
-      // { path: '/', element: <Dashboard /> },
-      { path: '*', element: <Navigate to="." /> }
+      { path: 'magazine/*', element: <MagazinesRoutes /> },
+      { path: '', element: <DashboardRoutes /> },
+      { path: '*', element: <Navigate to=".." /> }
     ]
   }
 ];
