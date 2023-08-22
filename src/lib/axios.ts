@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Axios from 'axios';
 
 import { API_URL } from '@/config';
@@ -13,12 +14,21 @@ import { API_URL } from '@/config';
 //   return config;
 // }
 
-export const axios = Axios.create({
+export const httpClient = Axios.create({
   baseURL: API_URL
 });
 
+export const addAccessTokenInterceptor = (getAccessTokenSilently: () => Promise<string>) => {
+  httpClient.interceptors.request.use(async (config: any) => {
+    const token = await getAccessTokenSilently();
+    console.log('token', token);
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  });
+};
+
 // axios.interceptors.request.use(authRequestInterceptor);
-axios.interceptors.response.use(
+httpClient.interceptors.response.use(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   (response) => response.data,
   (error) =>

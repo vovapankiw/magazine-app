@@ -3,16 +3,17 @@ import { Box, Button, Paper, Typography } from '@mui/material';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import FlagIcon from '@mui/icons-material/Flag';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { useAuth0 } from '@auth0/auth0-react';
 import { Head } from '@/components/Head';
 // eslint-disable-next-line import/extensions
 import Magazine from '@/assets/magazine-background.jpg';
 
 export const Landing = () => {
   const navigate = useNavigate();
-  // const { user } = useAuth();
+  const { isAuthenticated } = useAuth0();
 
   const handleStart = () => {
-    if (true) {
+    if (isAuthenticated) {
       navigate('/app');
     } else {
       navigate('/auth/login');
@@ -35,7 +36,7 @@ export const Landing = () => {
               </Button>
             </Box>
             <Box>
-              <a href="https://github.com/jsx-eslint/eslint" target="_blank" rel="noreferrer">
+              <a href="https://github.com/vovapankiw/magazine-app" target="_blank" rel="noreferrer">
                 <Button startIcon={<GitHubIcon />}>Github Repo</Button>
               </a>
             </Box>

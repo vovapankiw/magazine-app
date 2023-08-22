@@ -1,15 +1,19 @@
-import { useRoutes } from 'react-router-dom';
+import { Navigate, useRoutes } from 'react-router-dom';
 
+import { useAuth0 } from '@auth0/auth0-react';
 import { protectedRoutes } from './protected';
 import { publicRoutes } from './public';
 import { Landing } from '../features/misc';
 
 export const AppRoutes = () => {
-  const auth = true;
-  const commonRoutes = [{ path: '/', element: <Landing /> }];
+  const { isAuthenticated } = useAuth0();
+  const commonRoutes = [
+    { path: '/', element: <Landing /> },
+    { path: '*', element: <Navigate to="/" /> }
+  ];
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const routes = auth ? protectedRoutes : publicRoutes;
+  const routes = isAuthenticated ? protectedRoutes : publicRoutes;
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const element = useRoutes([...routes, ...commonRoutes]);
