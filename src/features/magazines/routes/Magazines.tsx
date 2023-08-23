@@ -6,6 +6,7 @@ import { Logo } from '@/components/Logo';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { useObserver } from '@/hooks/useObserver';
 import { fetchBooks } from '@/services/magazine.service';
+import { MagazineGrid } from './MagazineGrid';
 
 const HomeWrapper = styled(Box)`
   display: flex;
@@ -44,7 +45,7 @@ export const Magazines = () => {
     <HomeWrapper>
       <Logo width="140" />
       <SearchBar />
-      {/* GRID */}
+      <MagazineGrid data={data} />
       <div ref={containerRef}></div>
     </HomeWrapper>
   );
