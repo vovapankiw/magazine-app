@@ -10,9 +10,10 @@ export const protectedRoutes = [
     path: 'app',
     element: <Layout />,
     children: [
+      { path: '', element: <Navigate to="./dashboard" /> },
       { path: 'magazine/*', element: <MagazinesRoutes /> },
-      { path: '', element: <DashboardRoutes /> },
-      { path: '*', element: <Navigate to=".." /> }
+      { path: 'dashboard/*', element: <DashboardRoutes /> },
+      { path: '*', element: <Navigate to="./dashboard" /> }
     ]
   }
 ];

@@ -82,7 +82,7 @@ export const SideBar = () => {
       <DrawerHeader>
         {open && (
           <Grid2 container>
-            <Typography variant="h6">Seetings</Typography>
+            <Typography variant="h6">Volo library</Typography>
             <Typography variant="caption" color={grey[500]}>
               Manage your library
             </Typography>
@@ -95,7 +95,11 @@ export const SideBar = () => {
       <Divider />
       <List>
         {sidebarItems.map((sidebarItem) => (
-          <Link to={sidebarItem.link} style={{ textDecoration: 'none', color: grey[700] }}>
+          <Link
+            key={sidebarItem.section}
+            to={sidebarItem.link}
+            style={{ textDecoration: 'none', color: grey[700] }}
+          >
             <ListItem
               key={sidebarItem.section}
               disablePadding

@@ -19,15 +19,19 @@ const Layout = () => {
   return (
     <Box>
       <Header userName="Vova" onLogOut={logOutHandler} />
-      <Box px={3} pb={3}>
-        <SideBar />
-        <Suspense
-          fallback={
-            <div className="h-full w-full flex items-center justify-center">Loading...</div>
-          }
-        >
-          <Outlet />
-        </Suspense>
+      <Box px={3} py={3} display="flex">
+        <Box>
+          <SideBar />
+        </Box>
+        <Box>
+          <Suspense
+            fallback={
+              <div className="h-full w-full flex items-center justify-center">Loading...</div>
+            }
+          >
+            <Outlet />
+          </Suspense>
+        </Box>
       </Box>
     </Box>
   );

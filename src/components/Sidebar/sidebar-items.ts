@@ -1,7 +1,6 @@
-import CodeIcon from '@mui/icons-material/Code';
-import LoginIcon from '@mui/icons-material/Login';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PsychologyIcon from '@mui/icons-material/Psychology';
+import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
@@ -13,19 +12,14 @@ export type SidebarItem = {
 
 export const sidebarItems: SidebarItem[] = [
   {
-    section: 'Developer',
-    icon: CodeIcon,
-    link: 'developer'
+    section: 'Dashboard',
+    icon: DashboardCustomizeIcon,
+    link: 'dashboard'
   },
   {
-    section: 'Access',
-    icon: LoginIcon,
-    link: 'access'
-  },
-  {
-    section: 'Manage',
-    icon: ManageAccountsIcon,
-    link: 'management'
+    section: 'Magazines',
+    icon: NewspaperIcon,
+    link: 'magazine'
   },
   {
     section: 'Preferences',
