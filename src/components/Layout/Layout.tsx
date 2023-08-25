@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { Header } from '../Header';
+import { SideBar } from '../Sidebar/SideBar';
 
 const Layout = () => {
   // const { instance } = useMsal();
@@ -19,6 +20,7 @@ const Layout = () => {
     <Box>
       <Header userName="Vova" onLogOut={logOutHandler} />
       <Box px={3} pb={3}>
+        <SideBar />
         <Suspense
           fallback={
             <div className="h-full w-full flex items-center justify-center">Loading...</div>
