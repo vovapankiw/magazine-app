@@ -6,7 +6,7 @@ import { Logo } from '@/components/Logo';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { useObserver } from '@/hooks/useObserver';
 import { fetchBooks } from '@/services/magazine.service';
-import { MagazineGrid } from './MagazineGrid';
+import { MagazineGrid } from '../components/MagazineGrid';
 
 const HomeWrapper = styled(Box)`
   display: flex;

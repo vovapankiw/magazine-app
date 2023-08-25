@@ -9,9 +9,7 @@ export const Login = () => {
 
   useEffect(() => {
     const auth0Login = async () => {
-      await loginWithPopup().then((token) => {
-        console.log(token);
-      });
+      await loginWithPopup();
     };
     void auth0Login();
   }, [loginWithPopup]);
