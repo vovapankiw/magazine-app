@@ -1,29 +1,21 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
+import { useAuth0 } from '@auth0/auth0-react';
 import { Header } from '../Header';
 import { SideBar } from '../Sidebar/SideBar';
 
 const Layout = () => {
-  // const { instance } = useMsal();
-  // const activeAccount = instance.getActiveAccount();
-
-  const logOutHandler = () => {
-    // const logoutRequest = {
-    //   account: activeAccount,
-    //   postLogoutRedirectUri: '/'
-    // };
-    // instance.logoutRedirect(logoutRequest);
-  };
+  const { logout } = useAuth0();
 
   return (
     <Box>
-      <Header userName="Vova" onLogOut={logOutHandler} />
-      <Box px={3} py={3} display="flex">
+      <Header userName="Vova" onLogOut={logout} />
+      <Box px={3} py={3} display="flex" height="100%">
         <Box>
           <SideBar />
         </Box>
-        <Box>
+        <Box height="100%" width="100%">
           <Suspense
             fallback={
               <div className="h-full w-full flex items-center justify-center">Loading...</div>

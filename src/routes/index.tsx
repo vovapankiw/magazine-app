@@ -26,5 +26,5 @@ export const AppRoutes = () => {
     );
   }
 
-  return <div>{element}</div>;
+  return <Box>{element}</Box>;
 };
