@@ -15,7 +15,7 @@ const Layout = () => {
         <Box>
           <SideBar />
         </Box>
-        <Box height="100%" width="100%">
+        <Box width="100%">
           <Suspense
             fallback={
               <div className="h-full w-full flex items-center justify-center">Loading...</div>
