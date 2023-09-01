@@ -1,4 +1,4 @@
-export const API_URL = (process.env.REACT_APP_API_URL as string) || 'http://localhost:7071/api/';
+export const API_URL = (process.env.REACT_APP_API_URL as string) || 'http://localhost:3001/api/v1/';
 export const JWT_SECRET = '123456' as string;
 
 /** AUTH */

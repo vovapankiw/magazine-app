@@ -5,8 +5,8 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { Logo } from '@/components/Logo';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { useObserver } from '@/hooks/useObserver';
-import { fetchBooks } from '@/services/magazine.service';
 import { MagazineGrid } from '../components/MagazineGrid';
+import { fetchMagazines } from '@/api/magazine-api';
 
 const HomeWrapper = styled(Box)`
   display: flex;
@@ -28,7 +28,7 @@ export const Magazines = () => {
 
   const { data, error, isFetching, fetchNextPage } = useInfiniteQuery(
     ['books'],
-    ({ pageParam }) => fetchBooks(pageParam?.nextPage, DEFAULT_LIMIT),
+    ({ pageParam }) => fetchMagazines(pageParam?.nextPage, DEFAULT_LIMIT),
     {
       getPreviousPageParam: (previousPage) => previousPage ?? undefined,
       getNextPageParam: (nextPage) => nextPage ?? undefined
@@ -40,6 +40,8 @@ export const Magazines = () => {
       fetchNextPage();
     }
   }, [isVisible]);
+
+  if (isFetching) return <>Fetching...</>;
 
   return (
     <HomeWrapper>

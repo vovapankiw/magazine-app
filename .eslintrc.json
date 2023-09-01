@@ -25,6 +25,7 @@
   ],
   "rules": {
     "arrow-body-style": ["warn", "as-needed"],
+    "global-require": 0,
     "comma-dangle": "off",
     "no-void": "off",
     "no-console": "off",
