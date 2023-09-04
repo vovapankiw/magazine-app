@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
+import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
 import { Magazine } from '@/api/magazine-api';
 
 type MagazineItemProp = {

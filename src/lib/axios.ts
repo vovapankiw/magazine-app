@@ -28,16 +28,16 @@ export const addAccessTokenInterceptor = (getAccessTokenSilently: () => Promise<
 };
 
 // axios.interceptors.request.use(authRequestInterceptor);
-httpClient.interceptors.response.use(
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  (response) => response.data,
-  (error) =>
-    // const message = error.response?.data?.message || error.message;
-    // useNotificationStore.getState().addNotification({
-    //   type: 'error',
-    //   title: 'Error',
-    //   message
-    // });
+// httpClient.interceptors.response.use(
+//   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+//   (response) => response.data,
+//   (error) =>
+//     // const message = error.response?.data?.message || error.message;
+//     // useNotificationStore.getState().addNotification({
+//     //   type: 'error',
+//     //   title: 'Error',
+//     //   message
+//     // });
 
-    Promise.reject(error)
-);
+//     Promise.reject(error)
+// );

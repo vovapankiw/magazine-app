@@ -13,7 +13,16 @@ export type Magazine = {
   categories: string;
 };
 
-export async function fetchMagazines(offset = 0, limit = 10): Promise<Magazine[]> {
-  const { data } = await httpClient.get<Magazine[]>(`/magazines?offset=${offset}&limit=${limit}`);
+export interface IPaginate<T> {
+  data: T;
+  nextPage: number;
+  previousPage: number;
+  limit?: number;
+}
+
+export async function fetchMagazines(offset = 0, limit = 10): Promise<IPaginate<Magazine[]>> {
+  const { data } = await httpClient.get<IPaginate<Magazine[]>>(
+    `/magazines?offset=${offset}&limit=${limit}`
+  );
   return data;
 }

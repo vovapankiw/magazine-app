@@ -12,10 +12,15 @@ const appOrigin = `http://localhost:${appPort}`;
 app.use(cors({ origin: appOrigin }));
 
 app.get('/api/v1/magazines', (req, res) => {
+  const offset = parseInt(req.query.offset, 10);
+  const limit = parseInt(req.query.limit, 10);
+
+  const data = magazinesData.slice(offset, limit + offset);
+
   res.send({
-    data: magazinesData,
-    previousPage: parseInt(req.query.offset, 10),
-    nextPage: parseInt(req.query.offset, 10) + parseInt(req.query.limit, 10)
+    data,
+    previousPage: offset > 0 ? offset : null,
+    nextPage: magazinesData.length > offset + limit ? offset + limit : null
   });
 });
 

@@ -17,7 +17,7 @@ const HomeWrapper = styled(Box)`
   margin-top: 20px;
 `;
 
-const DEFAULT_LIMIT = 10;
+const DEFAULT_LIMIT = 16;
 
 export const Magazines = () => {
   const [containerRef, isVisible] = useObserver({
@@ -30,8 +30,9 @@ export const Magazines = () => {
     ['books'],
     ({ pageParam }) => fetchMagazines(pageParam?.nextPage, DEFAULT_LIMIT),
     {
-      getPreviousPageParam: (previousPage) => previousPage ?? undefined,
-      getNextPageParam: (nextPage) => nextPage ?? undefined
+      getNextPageParam: (pageParam) => {
+        return pageParam.nextPage ? pageParam : undefined;
+      }
     }
   );
 
@@ -40,8 +41,6 @@ export const Magazines = () => {
       fetchNextPage();
     }
   }, [isVisible]);
-
-  if (isFetching) return <>Fetching...</>;
 
   return (
     <HomeWrapper>
