@@ -14,8 +14,20 @@ const HomeWrapper = styled(Box)`
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  margin-top: 20px;
 `;
+
+// const HomeSearch = styled(Box)`
+//   display: flex;
+//   justify-content: start;
+//   align-items: center;
+//   flex-direction: column;
+//   padding: 48px;
+//   position: sticky;
+//   top: 82px;
+//   z-index: 2;
+//   background-color: white;
+//   width: 100%;
+// `;
 
 const DEFAULT_LIMIT = 16;
 
@@ -44,8 +56,10 @@ export const Magazines = () => {
 
   return (
     <HomeWrapper>
-      <Logo width="140" />
-      <SearchBar />
+      {/* <HomeSearch> */}
+      {/* <Logo width="140" />
+        <SearchBar /> */}
+      {/* </HomeSearch> */}
       <MagazineGrid data={data} />
       <div ref={containerRef}></div>
     </HomeWrapper>

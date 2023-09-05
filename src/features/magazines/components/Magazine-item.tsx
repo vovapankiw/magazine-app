@@ -7,7 +7,7 @@ type MagazineItemProp = {
 };
 
 export const MagazineItem = ({ magazine }: MagazineItemProp) => (
-  <Card sx={{ maxWidth: 205 }}>
+  <Card sx={{ maxWidth: 205, width: 205 }}>
     <CardActionArea>
       <CardMedia
         component="img"

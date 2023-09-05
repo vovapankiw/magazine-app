@@ -46,7 +46,7 @@ export const Header = ({ userName, onLogOut }: HeaderProps) => {
   const isHome = useMatch('/');
 
   return (
-    <>
+    <Box position="sticky" top="0" zIndex="2">
       <HeaderWrapper>
         {renderLogoSection(isHome, userName)}
         <NavGroup>
@@ -55,6 +55,6 @@ export const Header = ({ userName, onLogOut }: HeaderProps) => {
         </NavGroup>
       </HeaderWrapper>
       <Divider orientation="horizontal" flexItem />
-    </>
+    </Box>
   );
 };
