@@ -20,7 +20,7 @@ const HomeWrapper = styled(Box)`
 const DEFAULT_LIMIT = 32;
 
 export const Magazines = () => {
-  const [searchValue, setSearchValue] = useQueryParam('search', StringParam);
+  const [searchValue, setSearchValue] = useQueryParam('query', StringParam);
   const [query, setQuery] = useState(searchValue || '');
   const [containerRef, isVisible] = useObserver({
     root: null,
@@ -51,7 +51,8 @@ export const Magazines = () => {
   }, [isVisible]);
 
   const debouncedSetSearchValue = (query: string) => {
-    const searchValue = query.trim() === '' ? undefined : query;
+    const sanitizedQuery = query.trim().toLowerCase();
+    const searchValue = sanitizedQuery === '' ? undefined : sanitizedQuery;
     setSearchValue(searchValue);
   };
 

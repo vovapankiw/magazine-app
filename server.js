@@ -17,7 +17,7 @@ app.get('/api/v1/magazines', (req, res) => {
   const query = req.query.query;
 
   const data = magazinesData
-    .filter(({ name }) => name.includes(query))
+    .filter(({ name }) => name.toLowerCase().includes(query))
     .slice(offset, limit + offset);
 
   res.send({
