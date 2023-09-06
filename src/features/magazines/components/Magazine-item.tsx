@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
+import { IconButton, ImageListItem, ImageListItemBar } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
 import { Magazine } from '@/api/magazine-api';
 
 type MagazineItemProp = {
@@ -7,19 +8,24 @@ type MagazineItemProp = {
 };
 
 export const MagazineItem = ({ magazine }: MagazineItemProp) => (
-  <Card sx={{ maxWidth: 205, width: 205 }}>
-    <CardActionArea>
-      <CardMedia
-        component="img"
-        height="245"
-        image={require(`../../../assets/images/${magazine.image}`)}
-        alt={magazine.name}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="body2" component="div">
-          {magazine.name}
-        </Typography>
-      </CardContent>
-    </CardActionArea>
-  </Card>
+  <ImageListItem key={magazine.image}>
+    <img
+      src={require(`../../../assets/images/${magazine.image}`)}
+      height="245px"
+      alt={magazine.name}
+      loading="lazy"
+    />
+    <ImageListItemBar
+      title={magazine.name}
+      subtitle={magazine.country}
+      actionIcon={
+        <IconButton
+          sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+          aria-label={`info about ${magazine.name}`}
+        >
+          <InfoIcon />
+        </IconButton>
+      }
+    />
+  </ImageListItem>
 );
