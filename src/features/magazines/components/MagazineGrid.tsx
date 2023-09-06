@@ -8,7 +8,10 @@ export const MagazineGrid = ({
 }: {
   data: InfiniteData<IPaginate<Magazine[]>> | undefined;
 }) => (
-  <ImageList cols={6} gap={40}>
+  <ImageList
+    gap={40}
+    sx={{ gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr)) !important', width: '100%' }}
+  >
     {data?.pages?.map((page) => (
       <>
         {page.data.map((magazine: Magazine) => (

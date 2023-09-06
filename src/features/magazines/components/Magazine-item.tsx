@@ -8,7 +8,7 @@ type MagazineItemProp = {
 };
 
 export const MagazineItem = ({ magazine }: MagazineItemProp) => (
-  <ImageListItem key={magazine.image}>
+  <ImageListItem key={magazine.image} sx={{ minHeight: '245px' }}>
     <img
       src={require(`../../../assets/images/${magazine.image}`)}
       height="245px"

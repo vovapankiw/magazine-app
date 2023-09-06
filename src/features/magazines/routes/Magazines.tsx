@@ -31,7 +31,6 @@ export const Magazines = () => {
   const { data, fetchNextPage } = useInfiniteQuery(
     ['magazines', searchValue],
     ({ pageParam }) => {
-      console.log(searchValue);
       return fetchMagazines({
         offset: pageParam?.nextPage,
         limit: DEFAULT_LIMIT,
