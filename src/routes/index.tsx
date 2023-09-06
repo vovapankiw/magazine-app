@@ -1,4 +1,6 @@
 import { Navigate, useRoutes } from 'react-router-dom';
+import { QueryParamProvider } from 'use-query-params';
+import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
 
 import { useAuth0 } from '@auth0/auth0-react';
 import { Box, CircularProgress } from '@mui/material';
@@ -26,5 +28,9 @@ export const AppRoutes = () => {
     );
   }
 
-  return <Box>{element}</Box>;
+  return (
+    <QueryParamProvider adapter={ReactRouter6Adapter}>
+      <Box>{element}</Box>
+    </QueryParamProvider>
+  );
 };

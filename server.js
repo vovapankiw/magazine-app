@@ -14,8 +14,11 @@ app.use(cors({ origin: appOrigin }));
 app.get('/api/v1/magazines', (req, res) => {
   const offset = parseInt(req.query.offset, 10);
   const limit = parseInt(req.query.limit, 10);
+  const query = req.query.query;
 
-  const data = magazinesData.slice(offset, limit + offset);
+  const data = magazinesData
+    .filter(({ name }) => name.includes(query))
+    .slice(offset, limit + offset);
 
   res.send({
     data,

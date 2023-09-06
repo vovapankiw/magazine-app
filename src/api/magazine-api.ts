@@ -1,5 +1,11 @@
 import { httpClient } from '@/lib/axios';
 
+type FetchMagazinesProps = {
+  offset: number;
+  limit: number;
+  query?: string | undefined | null;
+};
+
 export type Magazine = {
   name: string;
   circulation: string;
@@ -20,9 +26,13 @@ export interface IPaginate<T> {
   limit?: number;
 }
 
-export async function fetchMagazines(offset = 0, limit = 10): Promise<IPaginate<Magazine[]>> {
+export async function fetchMagazines({
+  offset = 0,
+  limit = 10,
+  query = ''
+}: FetchMagazinesProps): Promise<IPaginate<Magazine[]>> {
   const { data } = await httpClient.get<IPaginate<Magazine[]>>(
-    `/magazines?offset=${offset}&limit=${limit}`
+    `/magazines?offset=${offset}&limit=${limit}&query=${query || ''}`
   );
   return data;
 }
