@@ -16,20 +16,7 @@ const HomeWrapper = styled(Box)`
   gap: 20px;
 `;
 
-// const HomeSearch = styled(Box)`
-//   display: flex;
-//   justify-content: start;
-//   align-items: center;
-//   flex-direction: column;
-//   padding: 48px;
-//   position: sticky;
-//   top: 82px;
-//   z-index: 2;
-//   background-color: white;
-//   width: 100%;
-// `;
-
-const DEFAULT_LIMIT = 16;
+const DEFAULT_LIMIT = 32;
 
 export const Magazines = () => {
   const [containerRef, isVisible] = useObserver({

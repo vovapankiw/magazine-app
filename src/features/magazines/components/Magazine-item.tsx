@@ -13,7 +13,7 @@ export const MagazineItem = ({ magazine }: MagazineItemProp) => (
         component="img"
         height="245"
         image={require(`../../../assets/images/${magazine.image}`)}
-        alt="green iguana"
+        alt={magazine.name}
       />
       <CardContent>
         <Typography gutterBottom variant="body2" component="div">
