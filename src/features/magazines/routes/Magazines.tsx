@@ -17,6 +17,18 @@ const HomeWrapper = styled(Box)`
   gap: 20px;
 `;
 
+const SearchWrapper = styled(Box)`
+  position: sticky;
+  top: 82px;
+  z-index: 1;
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: white;
+`;
+
 const DEFAULT_LIMIT = 32;
 
 export const Magazines = () => {
@@ -62,11 +74,15 @@ export const Magazines = () => {
   };
 
   return (
-    <HomeWrapper>
-      <Logo width="140" />
-      <SearchBar query={query} setQuery={handleSearch} />
-      <MagazineGrid data={data} />
-      <div ref={containerRef}></div>
-    </HomeWrapper>
+    <>
+      <SearchWrapper>
+        <Logo width="140" />
+        <SearchBar query={query} setQuery={handleSearch} />
+      </SearchWrapper>
+      <HomeWrapper>
+        <MagazineGrid data={data} />
+        <div ref={containerRef}></div>
+      </HomeWrapper>
+    </>
   );
 };

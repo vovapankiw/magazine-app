@@ -11,7 +11,7 @@ const Layout = () => {
   return (
     <Box>
       <Header userName="Vova" onLogOut={logout} />
-      <Box px={3} py={3} display="flex" height="100%" overflow="hidden">
+      <Box px={3} pb={3} display="flex" height="100%">
         <Box>
           <SideBar />
         </Box>
