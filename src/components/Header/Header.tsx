@@ -34,7 +34,7 @@ const renderLogoSection = (isHome: PathMatch<string> | null, userName = 'guest')
       Welcome back, <b>{userName}</b>
     </WelcomeText>
   ) : (
-    <Link to="/">
+    <Link to="/app/dashboard">
       <Logo width="50" />
     </Link>
   );
@@ -43,7 +43,7 @@ const renderLogoSection = (isHome: PathMatch<string> | null, userName = 'guest')
 };
 
 export const Header = ({ userName, onLogOut }: HeaderProps) => {
-  const isHome = useMatch('/');
+  const isHome = useMatch('/app/dashboard');
 
   return (
     <Box position="sticky" top="0" zIndex="2">

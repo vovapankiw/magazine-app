@@ -19,7 +19,7 @@ const HomeWrapper = styled(Box)`
 
 const SearchWrapper = styled(Box)`
   position: sticky;
-  top: 82px;
+  top: 83px;
   z-index: 1;
   padding: 40px 0;
   display: flex;
@@ -76,7 +76,6 @@ export const Magazines = () => {
   return (
     <>
       <SearchWrapper>
-        <Logo width="140" />
         <SearchBar query={query} setQuery={handleSearch} />
       </SearchWrapper>
       <HomeWrapper>
