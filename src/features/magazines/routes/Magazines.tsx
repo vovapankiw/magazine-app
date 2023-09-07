@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Box, styled } from '@mui/material';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Logo } from '@/components/Logo';
@@ -8,6 +8,7 @@ import { useObserver } from '@/hooks/useObserver';
 import { MagazineGrid } from '../components/MagazineGrid';
 import { fetchMagazines } from '@/api/magazine-api';
 import { StringParam, useQueryParam } from 'use-query-params';
+import { debounce } from '@/utils/debounce';
 
 const HomeWrapper = styled(Box)`
   display: flex;
@@ -62,11 +63,13 @@ export const Magazines = () => {
     }
   }, [isVisible]);
 
-  const debouncedSetSearchValue = (query: string) => {
+  const saveSearchValue = (query: string) => {
     const sanitizedQuery = query.trim().toLowerCase();
     const searchValue = sanitizedQuery === '' ? undefined : sanitizedQuery;
     setSearchValue(searchValue);
   };
+
+  const debouncedSetSearchValue = useCallback(debounce(saveSearchValue, 500), []);
 
   const handleSearch = (query: string) => {
     setQuery(query);
