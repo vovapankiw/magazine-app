@@ -6,6 +6,7 @@ import { Spinner } from '@/components/Spinner';
 import { fetchMagazine } from '@/api/magazine-api';
 import { MagazinePreview } from '../components/Magazine-preview';
 import { MagazineDescription } from '../components/Magazine-description';
+import { Breadcrumbs } from '@/components/Bredcrumbs/Breadcrumbs';
 
 export const Magazine = () => {
   const { magazineId } = useParams();
@@ -21,6 +22,9 @@ export const Magazine = () => {
   return (
     <Box my={8} mx={2}>
       <Grid container spacing={2}>
+        <Grid xs={12} mb={4} position="sticky" top="139px">
+          <Breadcrumbs />
+        </Grid>
         <Grid lg={6} xs={12} mb={4}>
           <MagazinePreview magazine={data} />
         </Grid>

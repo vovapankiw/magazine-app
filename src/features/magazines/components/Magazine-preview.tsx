@@ -11,7 +11,7 @@ type MagazinePreviewProps = {
 export const MagazinePreview = ({ magazine }: MagazinePreviewProps) => {
   console.log(magazine);
   return (
-    <Grid container spacing={2} justifyContent="center" gap="20px" position="sticky" top="131px">
+    <Grid container spacing={2} justifyContent="center" gap="20px" position="sticky" top="215px">
       <Grid
         container
         spacing={2}
