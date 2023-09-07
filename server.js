@@ -32,7 +32,7 @@ app.get('/api/v1/magazines/:id', (req, res) => {
   const magazine = magazinesData.find(
     ({ name }) => name.trim().toLowerCase().split(' ').join('-') === id
   );
-  console.log(id);
+
   if (magazine) {
     res.send(magazine);
   } else {

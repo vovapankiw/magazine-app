@@ -11,7 +11,7 @@ type MagazinePreviewProps = {
 export const MagazinePreview = ({ magazine }: MagazinePreviewProps) => {
   console.log(magazine);
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} justifyContent="center" gap="20px" position="sticky" top="131px">
       <Grid
         container
         spacing={2}
@@ -19,6 +19,7 @@ export const MagazinePreview = ({ magazine }: MagazinePreviewProps) => {
         display="flex"
         justifyContent="center"
         alignItems="center"
+        gap="40px"
       >
         <Grid>
           <Chip
@@ -42,22 +43,13 @@ export const MagazinePreview = ({ magazine }: MagazinePreviewProps) => {
             }}
           />
         </Grid>
-        <Grid>
-          <Chip
-            label="Read demo"
-            clickable
-            sx={{
-              height: '40px'
-            }}
-          />
-        </Grid>
       </Grid>
 
-      <Grid xs={12} display="flex" justifyContent="center" alignItems="center">
+      <Grid xs={12} display="flex" justifyContent="center" alignItems="center" height="400px">
         <img
           src={require(`../../../assets/images/${magazine.image}`)}
           alt={magazine.name}
-          style={{ borderRadius: '10px', objectFit: 'contain', maxWidth: '100%' }}
+          style={{ borderRadius: '10px', objectFit: 'contain', maxWidth: '100%', height: '100%  ' }}
         />
       </Grid>
     </Grid>
