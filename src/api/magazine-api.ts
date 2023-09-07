@@ -36,3 +36,8 @@ export async function fetchMagazines({
   );
   return data;
 }
+
+export async function fetchMagazine(name: string | undefined = ''): Promise<Magazine> {
+  const { data } = await httpClient.get<Magazine>(`/magazines/${name}`);
+  return data;
+}

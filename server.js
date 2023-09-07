@@ -27,4 +27,17 @@ app.get('/api/v1/magazines', (req, res) => {
   });
 });
 
+app.get('/api/v1/magazines/:id', (req, res) => {
+  const id = req.params.id;
+  const magazine = magazinesData.find(
+    ({ name }) => name.trim().toLowerCase().split(' ').join('-') === id
+  );
+  console.log(id);
+  if (magazine) {
+    res.send(magazine);
+  } else {
+    res.status(404).send('Magazine not found');
+  }
+});
+
 app.listen(port, () => console.log(`API Server listening on port ${port}`));
