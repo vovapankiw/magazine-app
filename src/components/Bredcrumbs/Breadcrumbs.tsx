@@ -1,5 +1,13 @@
-import { Typography, Breadcrumbs as MUIBreadcrumbs, Button } from '@mui/material';
+import { Typography, Breadcrumbs as MUIBreadcrumbs, Button, styled } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
+
+export const BreadcrumbItem = styled(Button)(({ theme }) => ({
+  marginLeft: '4px',
+  color: theme.palette.mode === 'dark' ? theme.palette.secondary.main : theme.palette.primary.main,
+  '&.MuiButtonBase-root:hover': {
+    background: 'transparent'
+  }
+}));
 
 export const Breadcrumbs = () => {
   const { pathname } = useLocation();
@@ -17,17 +25,9 @@ export const Breadcrumbs = () => {
             {name.toLocaleUpperCase()}
           </Typography>
         ) : (
-          <Button
-            sx={{
-              ml: 1,
-              '&.MuiButtonBase-root:hover': {
-                bgcolor: 'transparent'
-              }
-            }}
-            onClick={() => navigate(routeTo)}
-          >
+          <BreadcrumbItem disableRipple onClick={() => navigate(routeTo)}>
             {name}
-          </Button>
+          </BreadcrumbItem>
         );
       })}
     </MUIBreadcrumbs>

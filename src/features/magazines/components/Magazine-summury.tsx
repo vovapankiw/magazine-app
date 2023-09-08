@@ -5,35 +5,28 @@ interface MagazineSummuryProps {
   summury: string;
 }
 
-const CustomizedTypography = styled(Typography)`
-  position: relative;
+const CustomizedTypography = styled(Typography)(({ theme }) => ({
+  position: 'relative',
+  padding: '10px',
+  color: theme.palette.text.secondary,
+  backgroundColor: theme.palette.background.paper,
+  '&.description--short': {
+    overflow: 'hidden',
+    maxHeight: '130px'
+  },
 
-  &.description--short {
-    overflow: hidden;
-    max-height: 130px;
+  '&.description--short:before': {
+    content: '""',
+    position: 'absolute',
+    display: 'block',
+    top: '130px',
+    left: 0,
+    right: 0,
+    height: '20px',
+    zIndex: 1,
+    background: 'linear-gradient(transparent 0%, #fff 70%)'
   }
-
-  &.description--short:before {
-    content: '';
-    position: absolute;
-    display: block;
-    top: 120px;
-    left: 0;
-    right: 0;
-    height: 20px;
-    z-index: 1;
-    background: -webkit-gradient(
-      linear,
-      left top,
-      left bottom,
-      from(transparent),
-      color-stop(70%, #fff)
-    );
-    background: -webkit-linear-gradient(transparent 0%, #fff 70%);
-    background: -o-linear-gradient(transparent 0%, #fff 70%);
-    background: linear-gradient(transparent 0%, #fff 70%);
-  }
-`;
+}));
 
 export const MagazineSummury = ({ summury }: MagazineSummuryProps) => {
   const [isOpen, setOpen] = useState(false);
@@ -51,7 +44,7 @@ export const MagazineSummury = ({ summury }: MagazineSummuryProps) => {
         {summury}
       </CustomizedTypography>
 
-      <Button onClick={handleClick} sx={{ 'margin-top': '10px' }}>
+      <Button onClick={handleClick} sx={{ 'margin-top': '10px' }} color="info">
         {isOpen ? 'Show less' : 'Show more'}
       </Button>
     </>

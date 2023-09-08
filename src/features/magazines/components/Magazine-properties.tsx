@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Box, Button, Divider, Link, Stack, Typography, styled } from '@mui/material';
+import { Box, Button, Link, Stack, Typography, styled } from '@mui/material';
 import { Magazine } from '@/api/magazine-api';
+import { Divider } from '@/components/Divider';
 
 const Item = styled(Box)`
   display: flex;
@@ -14,6 +15,14 @@ const Wrapper = styled(Box)`
     overflow: hidden;
   }
 `;
+
+const PropertiesTitle = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.secondary
+}));
+
+const PropertiesLink = styled(Link)(({ theme }) => ({
+  color: theme.palette.info.main
+}));
 
 export type MagazinePropertiesProps = {
   magazine: Magazine;
@@ -29,48 +38,48 @@ export const MagazineProperties = ({ magazine }: MagazinePropertiesProps) => {
   return (
     <>
       <Wrapper className={isOpen ? 'full' : 'short'}>
-        <Typography variant="h6" sx={{ marginBottom: '10px' }}>
+        <PropertiesTitle variant="h6" sx={{ marginBottom: '10px' }}>
           Properties
-        </Typography>
+        </PropertiesTitle>
         <Stack divider={<Divider orientation="horizontal" flexItem />} spacing={2}>
           <Item>
-            <Typography variant="body1">Title</Typography>
-            <Typography variant="body1">{magazine.name}</Typography>
+            <PropertiesTitle variant="body1">Title</PropertiesTitle>
+            <PropertiesTitle variant="body1">{magazine.name}</PropertiesTitle>
           </Item>
           <Item>
-            <Typography variant="body1">Category</Typography>
-            <Typography variant="body1">{magazine.categories}</Typography>
+            <PropertiesTitle variant="body1">Category</PropertiesTitle>
+            <PropertiesTitle variant="body1">{magazine.categories}</PropertiesTitle>
           </Item>
           <Item>
-            <Typography variant="body1">Country</Typography>
-            <Typography variant="body1">{magazine.country}</Typography>
+            <PropertiesTitle variant="body1">Country</PropertiesTitle>
+            <PropertiesTitle variant="body1">{magazine.country}</PropertiesTitle>
           </Item>
           <Item>
-            <Typography variant="body1">Language</Typography>
-            <Typography variant="body1">{magazine.language}</Typography>
+            <PropertiesTitle variant="body1">Language</PropertiesTitle>
+            <PropertiesTitle variant="body1">{magazine.language}</PropertiesTitle>
           </Item>
           <Item>
-            <Typography variant="body1">Circulation</Typography>
-            <Typography variant="body1">{magazine.circulation}</Typography>
+            <PropertiesTitle variant="body1">Circulation</PropertiesTitle>
+            <PropertiesTitle variant="body1">{magazine.circulation}</PropertiesTitle>
           </Item>
           <Item>
-            <Typography variant="body1">Frequency</Typography>
-            <Typography variant="body1">{magazine.frequency}</Typography>
+            <PropertiesTitle variant="body1">Frequency</PropertiesTitle>
+            <PropertiesTitle variant="body1">{magazine.frequency}</PropertiesTitle>
           </Item>
           <Item>
-            <Typography variant="body1">Founded</Typography>
-            <Typography variant="body1">{magazine.founded}</Typography>
+            <PropertiesTitle variant="body1">Founded</PropertiesTitle>
+            <PropertiesTitle variant="body1">{magazine.founded}</PropertiesTitle>
           </Item>
           <Item>
-            <Typography variant="body1">Wikipedia</Typography>
-            <Link href={magazine.link} underline="none">
+            <PropertiesTitle variant="body1">Wikipedia</PropertiesTitle>
+            <PropertiesLink href={magazine.link} underline="none" color="success">
               Wikipedia link
-            </Link>
+            </PropertiesLink>
           </Item>
           <Item />
         </Stack>
       </Wrapper>
-      <Button onClick={handleClick} sx={{ 'margin-top': '10px' }}>
+      <Button color="info" onClick={handleClick} sx={{ 'margin-top': '10px' }}>
         {isOpen ? 'Less details' : 'More details'}
       </Button>
     </>

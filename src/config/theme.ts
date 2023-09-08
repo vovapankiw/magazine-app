@@ -14,7 +14,8 @@ export const lightTheme = createTheme({
       paper: 'rgb(231, 235, 240)'
     },
     text: {
-      primary: grey[500]
+      primary: grey[500],
+      secondary: grey[900]
     }
   }
 });
@@ -32,7 +33,8 @@ export const darkTheme = createTheme({
       paper: 'gainsboro'
     },
     text: {
-      primary: orange[800]
+      primary: orange[800],
+      secondary: orange[900]
     }
   }
 });

@@ -1,5 +1,13 @@
-import { Avatar, Box, Link, Typography } from '@mui/material';
+import { Avatar, Box, Link, Typography, styled } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
+const OwnerTitle = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.secondary
+}));
+
+const OwnerLink = styled(Typography)(({ theme }) => ({
+  color: theme.palette.info.main
+}));
 
 type MagazineOwnerProps = {
   ownerDesc: string;
@@ -7,22 +15,22 @@ type MagazineOwnerProps = {
 
 export const MagazineOwner = ({ ownerDesc }: MagazineOwnerProps) => (
   <>
-    <Typography variant="h6" sx={{ marginBottom: '10px' }}>
+    <OwnerTitle variant="h6" sx={{ marginBottom: '10px' }}>
       About author
-    </Typography>
+    </OwnerTitle>
     <Box sx={{ display: 'flex' }}>
-      <Typography variant="body2" sx={{ textAlign: 'justify', marginRight: '20px' }}>
+      <OwnerTitle variant="body2" sx={{ textAlign: 'justify', marginRight: '20px' }}>
         {ownerDesc}
-      </Typography>
+      </OwnerTitle>
       <Avatar src="/broken-image.jpg" sx={{ width: 70, height: 70 }} />
     </Box>
     <Link href="/" underline="none">
-      <Typography
+      <OwnerLink
         variant="subtitle2"
         sx={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}
       >
         More details about owner <ArrowForwardIosIcon fontSize="inherit" />
-      </Typography>
+      </OwnerLink>
     </Link>
   </>
 );
