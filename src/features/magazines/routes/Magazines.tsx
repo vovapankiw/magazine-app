@@ -18,17 +18,17 @@ const HomeWrapper = styled(Box)`
   gap: 20px;
 `;
 
-const SearchWrapper = styled(Box)`
-  position: sticky;
-  top: 83px;
-  z-index: 1;
-  padding: 40px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: white;
-`;
+const SearchWrapper = styled(Box)(({ theme }) => ({
+  position: 'sticky',
+  top: '83px',
+  zIndex: 1,
+  padding: '40px 0',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  background: theme.palette.background.default
+}));
 
 const DEFAULT_LIMIT = 32;
 

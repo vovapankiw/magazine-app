@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { IconButton, Theme, styled, Typography, Divider, ListItem } from '@mui/material';
+import { IconButton, Theme, styled, Typography, ListItem } from '@mui/material';
 import { CSSObject } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 
@@ -11,17 +11,17 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-
-import { grey } from '@mui/material/colors';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+
 import { sidebarItems } from './sidebar-items';
+import { Divider } from '../Divider';
 
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
-  top: '82px',
-  background: 'transparent',
+  top: '83px',
+  background: theme.palette.background.default,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen
@@ -30,8 +30,8 @@ const openedMixin = (theme: Theme): CSSObject => ({
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
-  top: '82px',
-  background: 'transparent',
+  top: '83px',
+  background: theme.palette.background.default,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
@@ -49,6 +49,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
+    '& .MuiPaper-root': {
+      borderColor:
+        theme.palette.mode === 'dark' ? theme.palette.secondary.main : theme.palette.primary.main
+    },
     ...(open && {
       ...openedMixin(theme),
       '& .MuiDrawer-paper': openedMixin(theme)
@@ -61,12 +65,23 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const DrawerHeader = styled('div')(({ theme }) => ({
+  color: theme.palette.text.primary,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar
+}));
+
+const ItemList = styled(List)(({ theme }) => ({
+  '& .MuiListItem-root': {
+    color: theme.palette.text.primary
+  },
+  '& .Mui-selected, & .Mui-selected .MuiListItemIcon-root': {
+    backgroundColor: `${theme.palette.background.paper} !important`,
+    color: theme.palette.mode === 'dark' ? theme.palette.secondary.main : theme.palette.primary.main
+  }
 }));
 
 export const SideBar = () => {
@@ -83,9 +98,7 @@ export const SideBar = () => {
         {open && (
           <Grid2 container>
             <Typography variant="h6">Volo library</Typography>
-            <Typography variant="caption" color={grey[500]}>
-              Manage your library
-            </Typography>
+            <Typography variant="caption">Manage your library</Typography>
           </Grid2>
         )}
         <IconButton onClick={handleDrawerState}>
@@ -93,13 +106,9 @@ export const SideBar = () => {
         </IconButton>
       </DrawerHeader>
       <Divider />
-      <List>
+      <ItemList>
         {sidebarItems.map((sidebarItem) => (
-          <Link
-            key={sidebarItem.section}
-            to={sidebarItem.link}
-            style={{ textDecoration: 'none', color: grey[700] }}
-          >
+          <Link key={sidebarItem.section} to={sidebarItem.link} style={{ textDecoration: 'none' }}>
             <ListItem
               key={sidebarItem.section}
               disablePadding
@@ -127,7 +136,7 @@ export const SideBar = () => {
             </ListItem>
           </Link>
         ))}
-      </List>
+      </ItemList>
     </Drawer>
   );
 };

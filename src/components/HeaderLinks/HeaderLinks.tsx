@@ -24,27 +24,31 @@ export const HeaderLinks = () => {
     marginLeft: '6px'
   }));
 
+  const HeaderButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.mode === 'dark' ? theme.palette.secondary.main : theme.palette.primary.main
+  }));
+
   return (
     <LinksWrapper>
       <LinkWrapper>
         <Link to="/analytics">
-          <Button>
+          <HeaderButton>
             <Tooltip title="View Library usage analytics">
               <NavTitleContainer>
                 <PollOutlinedIcon />
                 <NavTitleText>Analytics</NavTitleText>
               </NavTitleContainer>
             </Tooltip>
-          </Button>
+          </HeaderButton>
         </Link>
       </LinkWrapper>
       <LinkWrapper style={{ marginRight: 12 }}>
         <Link to="/settings">
-          <Button>
+          <HeaderButton>
             <Tooltip title="Manage your Libary settings">
               <SettingsSuggestOutlinedIcon />
             </Tooltip>
-          </Button>
+          </HeaderButton>
         </Link>
       </LinkWrapper>
     </LinksWrapper>

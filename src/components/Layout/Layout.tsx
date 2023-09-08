@@ -1,17 +1,21 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, styled } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Header } from '../Header';
 import { SideBar } from '../Sidebar/SideBar';
+
+const Content = styled(Box)(({ theme }) => ({
+  background: theme.palette.background.default
+}));
 
 const Layout = () => {
   const { logout } = useAuth0();
 
   return (
-    <Box>
+    <Content>
       <Header userName="Vova" onLogOut={logout} />
-      <Box px={3} pb={3} display="flex" height="100%">
+      <Box px={3} display="flex" height="100%" minHeight="calc(100vh - 104px)" mt="52px">
         <Box>
           <SideBar />
         </Box>
@@ -25,7 +29,7 @@ const Layout = () => {
           </Suspense>
         </Box>
       </Box>
-    </Box>
+    </Content>
   );
 };
 

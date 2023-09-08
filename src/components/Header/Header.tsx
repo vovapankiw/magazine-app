@@ -1,23 +1,25 @@
 import { useContext, useState } from 'react';
-import { Box, Typography, styled, Divider } from '@mui/material';
+import { Box, Typography, styled, Theme } from '@mui/material';
 import { PathMatch, useMatch, Link } from 'react-router-dom';
 import { Logo } from '../Logo';
 import { HeaderLinks } from '../HeaderLinks';
 import { ManageAccount } from '../ManageAccounts';
 import { MaterialUISwitch } from '../Switch';
 import { ColorModeContext } from '@/providers';
+import { Divider } from '../Divider';
 // import { ManageAccount } from '../../../components/ManageAccount/ManageAccount';
 
-const HeaderWrapper = styled(Box)(() => ({
+const HeaderWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  background: 'linear-gradient(rgb(255, 255, 255), 75%, rgb(255, 255, 255))',
+  background: theme.palette.background.default,
   padding: '14px'
 }));
 
-const WelcomeText = styled(Typography)(() => ({
-  backgroundColor: 'transparent'
+const WelcomeText = styled(Typography)(({ theme }: { theme: Theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  color: theme.palette.text.secondary
 }));
 
 const NavGroup = styled(Box)(() => ({
@@ -56,7 +58,7 @@ export const Header = ({ userName, onLogOut }: HeaderProps) => {
   };
 
   return (
-    <Box position="sticky" top="0" zIndex="2">
+    <Box position="sticky" top="0" zIndex="2" height="52px">
       <HeaderWrapper>
         {renderLogoSection(isHome, userName)}
         <NavGroup>
