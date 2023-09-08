@@ -15,7 +15,7 @@ const Layout = () => {
   return (
     <Content>
       <Header userName="Vova" onLogOut={logout} />
-      <Box px={3} display="flex" height="100%" minHeight="calc(100vh - 104px)" mt="52px">
+      <Box px={3} display="flex" height="100%" minHeight="calc(100vh - 104px)">
         <Box>
           <SideBar />
         </Box>

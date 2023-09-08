@@ -20,9 +20,9 @@ export const HeaderLinks = () => {
     padding: '2px'
   }));
 
-  const NavTitleText = styled('span')(() => ({
-    marginLeft: '6px'
-  }));
+  // const NavTitleText = styled('span')(() => ({
+  //   marginLeft: '6px'
+  // }));
 
   const HeaderButton = styled(Button)(({ theme }) => ({
     color: theme.palette.mode === 'dark' ? theme.palette.secondary.main : theme.palette.primary.main
@@ -36,7 +36,6 @@ export const HeaderLinks = () => {
             <Tooltip title="View Library usage analytics">
               <NavTitleContainer>
                 <PollOutlinedIcon />
-                <NavTitleText>Analytics</NavTitleText>
               </NavTitleContainer>
             </Tooltip>
           </HeaderButton>
