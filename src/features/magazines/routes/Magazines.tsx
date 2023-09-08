@@ -1,14 +1,14 @@
-/* eslint-disable */
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { StringParam, useQueryParam } from 'use-query-params';
 import { Box, styled } from '@mui/material';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { Logo } from '@/components/Logo';
+import { QueryFunctionContext, useInfiniteQuery } from '@tanstack/react-query';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { useObserver } from '@/hooks/useObserver';
 import { MagazineGrid } from '../components/MagazineGrid';
 import { fetchMagazines } from '@/api/magazine-api';
-import { StringParam, useQueryParam } from 'use-query-params';
 import { debounce } from '@/utils/debounce';
+import { AddMagazineButton } from '../components/Add-magazine-button';
+import { CreateMagazineDialog } from '../components/CreateMagazineDialog';
 
 const HomeWrapper = styled(Box)`
   display: flex;
@@ -33,6 +33,7 @@ const SearchWrapper = styled(Box)(({ theme }) => ({
 const DEFAULT_LIMIT = 32;
 
 export const Magazines = () => {
+  const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useQueryParam('query', StringParam);
   const [query, setQuery] = useState(searchValue || '');
   const [containerRef, isVisible] = useObserver({
@@ -43,38 +44,38 @@ export const Magazines = () => {
 
   const { data, fetchNextPage } = useInfiniteQuery(
     ['magazines', searchValue],
-    ({ pageParam }) => {
-      return fetchMagazines({
-        offset: pageParam?.nextPage,
+    ({ pageParam }: QueryFunctionContext<(string | null | undefined)[], { nextPage: number }>) =>
+      fetchMagazines({
+        offset: pageParam?.nextPage as number,
         limit: DEFAULT_LIMIT,
         query: searchValue
-      });
-    },
+      }),
     {
-      getNextPageParam: (pageParam) => {
-        return pageParam.nextPage ? pageParam : undefined;
-      }
+      getNextPageParam: (pageParam) => (pageParam.nextPage ? pageParam : undefined)
     }
   );
 
   useEffect(() => {
     if (isVisible) {
-      fetchNextPage();
+      void fetchNextPage();
     }
-  }, [isVisible]);
+  }, [isVisible, fetchNextPage]);
 
-  const saveSearchValue = (query: string) => {
-    const sanitizedQuery = query.trim().toLowerCase();
-    const searchValue = sanitizedQuery === '' ? undefined : sanitizedQuery;
-    setSearchValue(searchValue);
-  };
+  const saveSearchValue = useCallback((searchQuery: string) => {
+    const sanitizedQuery = searchQuery.trim().toLowerCase();
+    const searchValueToUpdate = sanitizedQuery === '' ? undefined : sanitizedQuery;
+    setSearchValue(searchValueToUpdate);
+  }, []);
 
-  const debouncedSetSearchValue = useCallback(debounce(saveSearchValue, 500), []);
+  const debouncedSetSearchValue = useMemo(() => debounce(saveSearchValue, 500), [saveSearchValue]);
 
-  const handleSearch = (query: string) => {
-    setQuery(query);
-    debouncedSetSearchValue(query);
-  };
+  const handleSearch = useCallback(
+    (searchInput: string) => {
+      setQuery(searchInput);
+      debouncedSetSearchValue(searchInput);
+    },
+    [debouncedSetSearchValue]
+  );
 
   return (
     <>
@@ -83,8 +84,10 @@ export const Magazines = () => {
       </SearchWrapper>
       <HomeWrapper>
         <MagazineGrid data={data} />
-        <div ref={containerRef}></div>
+        <div ref={containerRef} />
       </HomeWrapper>
+      <AddMagazineButton addMagazine={() => setOpen(true)} />
+      <CreateMagazineDialog open={open} handleClose={() => setOpen(false)} />
     </>
   );
 };
