@@ -1,8 +1,11 @@
+import { useContext, useState } from 'react';
 import { Box, Typography, styled, Divider } from '@mui/material';
 import { PathMatch, useMatch, Link } from 'react-router-dom';
 import { Logo } from '../Logo';
 import { HeaderLinks } from '../HeaderLinks';
 import { ManageAccount } from '../ManageAccounts';
+import { ColorModeContext } from '@/config';
+import { MaterialUISwitch } from '../Switch';
 // import { ManageAccount } from '../../../components/ManageAccount/ManageAccount';
 
 const HeaderWrapper = styled(Box)(() => ({
@@ -43,7 +46,14 @@ const renderLogoSection = (isHome: PathMatch<string> | null, userName = 'guest')
 };
 
 export const Header = ({ userName, onLogOut }: HeaderProps) => {
+  const [checked, setChecked] = useState(false);
+  const colorMode = useContext(ColorModeContext);
   const isHome = useMatch('/app/dashboard');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    colorMode.toggleColorMode();
+    setChecked(event.target.checked);
+  };
 
   return (
     <Box position="sticky" top="0" zIndex="2">
@@ -51,6 +61,11 @@ export const Header = ({ userName, onLogOut }: HeaderProps) => {
         {renderLogoSection(isHome, userName)}
         <NavGroup>
           <HeaderLinks />
+          <MaterialUISwitch
+            checked={checked}
+            onChange={handleChange}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />
           <ManageAccount avatar="" name={userName} logOut={onLogOut} />
         </NavGroup>
       </HeaderWrapper>

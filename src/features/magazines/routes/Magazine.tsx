@@ -15,7 +15,13 @@ export const Magazine = () => {
     queryFn: () => fetchMagazine(magazineId)
   });
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) {
+    return (
+      <Box height="75vh" width="100%" display="flex" justifyContent="center" alignItems="center">
+        <Spinner />
+      </Box>
+    );
+  }
 
   if (isError) return <div>Opps something went wrong</div>;
 
