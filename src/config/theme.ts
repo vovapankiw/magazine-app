@@ -1,8 +1,5 @@
 import { createTheme } from '@mui/material/styles';
 import { green, purple, deepPurple } from '@mui/material/colors';
-import { createContext } from 'react';
-
-export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 export const lightTheme = createTheme({
   palette: {

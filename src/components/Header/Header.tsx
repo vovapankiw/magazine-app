@@ -4,8 +4,8 @@ import { PathMatch, useMatch, Link } from 'react-router-dom';
 import { Logo } from '../Logo';
 import { HeaderLinks } from '../HeaderLinks';
 import { ManageAccount } from '../ManageAccounts';
-import { ColorModeContext } from '@/config';
 import { MaterialUISwitch } from '../Switch';
+import { ColorModeContext } from '@/providers';
 // import { ManageAccount } from '../../../components/ManageAccount/ManageAccount';
 
 const HeaderWrapper = styled(Box)(() => ({

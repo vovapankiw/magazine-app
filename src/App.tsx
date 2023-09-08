@@ -1,29 +1,12 @@
-import { useMemo, useState } from 'react';
-import { ThemeProvider } from '@emotion/react';
 import { AppRoutes } from '@/routes';
-import { AppProvider } from './providers/app';
-import { ColorModeContext, darkTheme, lightTheme } from './config';
+import { AppProvider, ThemeCustomProvider } from './providers';
 
 function App() {
-  const [mode, setMode] = useState<'light' | 'dark'>('light');
-  const colorMode = useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-      }
-    }),
-    []
-  );
-
-  const theme = useMemo(() => (mode === 'light' ? lightTheme : darkTheme), [mode]);
-
   return (
     <AppProvider>
-      <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          <AppRoutes />
-        </ThemeProvider>
-      </ColorModeContext.Provider>
+      <ThemeCustomProvider>
+        <AppRoutes />
+      </ThemeCustomProvider>
     </AppProvider>
   );
 }
