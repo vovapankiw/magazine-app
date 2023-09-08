@@ -1,8 +1,8 @@
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 export type SidebarItem = {
   section: string;
@@ -13,12 +13,12 @@ export type SidebarItem = {
 export const sidebarItems: SidebarItem[] = [
   {
     section: 'Dashboard',
-    icon: DashboardCustomizeIcon,
+    icon: QueryStatsIcon,
     link: 'dashboard'
   },
   {
     section: 'Magazines',
-    icon: NewspaperIcon,
+    icon: DashboardCustomizeIcon,
     link: 'magazine'
   },
   {
