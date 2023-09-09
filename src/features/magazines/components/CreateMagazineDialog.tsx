@@ -102,7 +102,12 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
   const onSubmit = async (formData: IFormValue) => {
     console.log(formData);
     reset();
-    await Promise.resolve(formData);
+    try {
+      await Promise.resolve(formData);
+      handleCloseDialog();
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -143,7 +148,7 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
             </DialogContent>
 
             <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={handleCloseDialog}>Cancel</Button>
               <Button onClick={handleSubmit(onSubmit)}>Create</Button>
             </DialogActions>
           </form>

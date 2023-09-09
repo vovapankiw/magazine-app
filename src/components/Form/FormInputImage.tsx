@@ -1,7 +1,8 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
 import { CardPreview } from '../CardPreview';
 
@@ -14,8 +15,6 @@ export const FormInputImage = ({ name }: FormInputImageProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
-  // const imageElement = useRef();
-
   const showImage = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { files } = e.target as HTMLInputElement;
     if (!files || files.length === 0) {
@@ -24,6 +23,10 @@ export const FormInputImage = ({ name }: FormInputImageProps) => {
     }
 
     setSelectedFile(files[0]);
+  };
+
+  const removeImage = () => {
+    setSelectedFile(null);
   };
 
   useEffect(() => {
@@ -41,32 +44,6 @@ export const FormInputImage = ({ name }: FormInputImageProps) => {
       URL.revokeObjectURL(objectUrl);
     };
   }, [selectedFile]);
-
-  // const imagePreview = () => {
-  //   if (preview) {
-  //     return (
-  //       <img
-  //         ref={imageElement}
-  //         src={preview}
-  //         alt="screen"
-  //         style={{ height: '215px', width: '400px', objectFit: 'contain' }}
-  //       />
-  //     );
-  //   }
-  //   return (
-  //     <Box
-  //       style={{
-  //         width: '100%',
-  //         height: '215px',
-  //         display: 'flex',
-  //         justifyContent: 'center',
-  //         alignItems: 'center'
-  //       }}
-  //     >
-  //       No preview
-  //     </Box>
-  //   );
-  // };
 
   return (
     <Controller
@@ -93,6 +70,15 @@ export const FormInputImage = ({ name }: FormInputImageProps) => {
             />
             <PhotoCamera sx={{ fill: '#1976d2 !important' }} />
           </IconButton>
+          {preview && (
+            <IconButton
+              component="label"
+              onClick={removeImage}
+              sx={{ position: 'absolute', bottom: '10px', right: '50px' }}
+            >
+              <DeleteIcon sx={{ fill: '#1976d2 !important' }} />
+            </IconButton>
+          )}
         </Box>
       )}
     />
