@@ -1,6 +1,11 @@
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+// import { Dayjs } from 'dayjs';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Alert,
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -9,21 +14,61 @@ import {
   DialogTitle,
   Snackbar
 } from '@mui/material';
-import { useState } from 'react';
-import { FormAutocomplete, FormInputText } from '@/components/Form';
+import { FormAutocomplete, FormInputDate, FormInputText } from '@/components/Form';
+import { FormInputNumber } from '@/components/Form/FormInputNumber';
+import { FREQUENCY } from '@/constants';
 
-type FormData = {
+type IFormValue = {
   name: string;
-  circulation: number;
+  circulation: string;
   country: string;
   language: string;
-  image: string | null;
-  frequency: string;
-  founded: string;
-  final_issue: string;
-  link: string;
-  categories: string;
+  image?: string;
+  frequency?: string;
+  founded?: Date | null;
+  final_issue?: Date | null;
+  link?: string;
+  categories?: string;
 };
+
+const defaultValues: IFormValue = {
+  name: '',
+  circulation: '',
+  country: '',
+  language: '',
+  image: '',
+  frequency: '',
+  founded: null,
+  final_issue: null,
+  link: '',
+  categories: ''
+};
+
+const schema = Yup.object().shape({
+  name: Yup.string().label('Name').trim().required().min(5).max(64),
+  circulation: Yup.string().label('Circulation').required(),
+  country: Yup.string().label('Country').trim().required(),
+  language: Yup.string().label('Language').trim().required(),
+  // image: Yup.string().required(),
+  frequency: Yup.string().label('Frequency').oneOf(FREQUENCY),
+  founded: Yup.date().label('Founded').nullable(),
+  final_issue: Yup.date()
+    .label('Final issue')
+    .nullable()
+    .when('founded', (founded: Date[] | undefined | null, dateSchema) => {
+      const [dayJsDate] = founded || [];
+
+      if (dayJsDate) {
+        const foundedYear = dayJsDate.getFullYear();
+
+        return dateSchema.min(foundedYear, 'Founded should be before Final issue');
+      }
+
+      return dateSchema;
+    }),
+  link: Yup.string().label('Link').url()
+  // categories: Yup.string().label('Link').trim().required().min(10) // TODO enum
+});
 
 type CreateMagazineDialogProps = {
   open: boolean;
@@ -43,23 +88,14 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
 
   const methods = useForm({
     mode: 'all',
-    defaultValues: {
-      name: '',
-      circulation: 0,
-      country: '',
-      language: '',
-      image: null,
-      frequency: '',
-      founded: '',
-      final_issue: '',
-      link: '',
-      categories: ''
-    },
+    defaultValues,
+    resolver: yupResolver(schema),
     shouldUnregister: false
   });
 
   const { handleSubmit } = methods;
-  const onSubmit = async (formData: FormData) => {
+  const onSubmit = async (formData: IFormValue) => {
+    console.log(formData);
     await Promise.resolve(formData);
   };
 
@@ -67,46 +103,61 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
     <>
       <Dialog open={open} onClose={handleClose}>
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <DialogTitle>Create new project</DialogTitle>
+          <Box p={2}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <DialogTitle>Add new magazine</DialogTitle>
 
-            <DialogContent>
-              <DialogContentText>
-                Here you can create new project with all necessary info
-              </DialogContentText>
+              <DialogContent>
+                <DialogContentText>
+                  <FormInputText name="name" label="Name*" />
 
-              {/* <FormInputImage name="image" /> */}
+                  <FormInputNumber name="circulation" label="Circulation*" />
 
-              <FormInputText name="name" label="Name*" rules={{ required: 'Required' }} />
+                  <FormAutocomplete
+                    name="country"
+                    label="Country*"
+                    getOptionLabel={(option) => option.label}
+                    url="/countries"
+                  />
 
-              <FormInputText
-                name="description"
-                label="Description*"
-                rules={{ required: 'Required' }}
-              />
+                  <FormAutocomplete
+                    name="language"
+                    label="Language*"
+                    getOptionLabel={(option) => option.label}
+                    url="/languages"
+                  />
 
-              <FormAutocomplete
-                name="productOwner"
-                label="Assigne PO*"
-                getOptionLabel={(option) => option.title}
-                rules={{ required: 'Required' }}
-                url="/api/v1/owners"
-              />
+                  <FormAutocomplete
+                    name="frequency"
+                    label="Frequency"
+                    getOptionLabel={(option) => option.label}
+                    url="/frequency"
+                  />
 
-              <FormAutocomplete
-                name="team"
-                label="Assigne team*"
-                getOptionLabel={(option) => option.title}
-                rules={{ required: 'Required' }}
-                url="/api/v1/teams"
-              />
-            </DialogContent>
+                  <Box mt={4} display="flex" gap="10px">
+                    <FormInputDate name="founded" label="Founded" />
+                    <FormInputDate name="final_issue" label="Final issue" />
+                  </Box>
 
-            <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={handleSubmit(onSubmit)}>Create</Button>
-            </DialogActions>
-          </form>
+                  <FormInputText name="link" label="Link" />
+
+                  <FormAutocomplete
+                    name="category"
+                    label="Category"
+                    getOptionLabel={(option) => option.label}
+                    url="/category"
+                  />
+
+                  {/* <FormInputImage name="image" /> */}
+                </DialogContentText>
+              </DialogContent>
+
+              <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleSubmit(onSubmit)}>Create</Button>
+              </DialogActions>
+            </form>
+          </Box>
         </FormProvider>
       </Dialog>
       <Snackbar open={!!snackbarMessage} autoHideDuration={6000} onClose={closeSnackbar}>

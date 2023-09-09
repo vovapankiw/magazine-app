@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FieldError } from 'react-hook-form';
 
 import AutocompleteMui from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
+import { fetchOptions } from '@/api/autocomplete-api';
 
 type AutocompleteProps = {
   label: string;
-  getOptionLabel: (option: { title: string }) => string;
+  getOptionLabel: (option: { label: string }) => string;
   field: { onChange: (...event: any[]) => void };
   invalid: boolean;
   error: FieldError | undefined;
@@ -23,12 +24,17 @@ export const Autocomplete = ({
   url
 }: AutocompleteProps) => {
   const [open, setOpen] = useState(false);
-  const [options, setOptions] = useState<{ title: string }[]>([]);
+  const [options, setOptions] = useState<{ label: string }[]>([]);
   const loading = open && options.length === 0;
-  console.log(url);
-  async function getOptions() {
-    return Promise.resolve([{ title: 'sd' }]);
-  }
+
+  const getOptions = useCallback(async () => {
+    try {
+      return await fetchOptions(url);
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
+  }, [url]);
 
   useEffect(() => {
     let active = true;
@@ -48,7 +54,7 @@ export const Autocomplete = ({
     return () => {
       active = false;
     };
-  }, [loading]);
+  }, [loading, getOptions]);
 
   useEffect(() => {
     if (!open) {
@@ -56,8 +62,8 @@ export const Autocomplete = ({
     }
   }, [open]);
 
-  const compareOption = (option: { title: string }, value: { title: string }) =>
-    option.title === value.title;
+  const compareOption = (option: { label: string }, value: { label: string }) =>
+    option.label === value.label;
 
   return (
     <AutocompleteMui
@@ -73,7 +79,7 @@ export const Autocomplete = ({
       options={options}
       loading={loading}
       sx={{ width: '100%', mt: 3 }}
-      onChange={(e, value) => field.onChange(value)}
+      onChange={(e, value) => field.onChange(value?.label)}
       onInputChange={(_, data) => {
         if (data) field.onChange(data);
       }}

@@ -61,6 +61,7 @@
     "@typescript-eslint/no-misused-promises": [
       "error",
       { "checksVoidReturn": { "attributes": false } }
-    ]
+    ],
+    "newline-per-chained-call": ["off"] // Fix conflict with prettier printWidth
   }
 }

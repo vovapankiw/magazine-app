@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const magazinesData = require('./src/assets/output.json');
+const countriesData = require('./src/assets/countries.json');
 
 const app = express();
 
@@ -38,6 +39,29 @@ app.get('/api/v1/magazines/:id', (req, res) => {
   } else {
     res.status(404).send('Magazine not found');
   }
+});
+
+app.get('/api/v1/countries', (req, res) => {
+  res.send(countriesData);
+});
+
+app.get('/api/v1/languages', (req, res) => {
+  res.send([{ label: 'English' }, { label: 'German' }, { label: 'Ukrainian' }]);
+});
+
+app.get('/api/v1/frequency', (req, res) => {
+  res.send([
+    { label: 'weekly' },
+    { label: 'monthly' },
+    { label: 'bewwekly' },
+    { label: 'yearly' },
+    { label: '10 pre year' },
+    { label: '6 per year' }
+  ]);
+});
+
+app.get('/api/v1/category', (req, res) => {
+  res.send([{ label: 'Sport' }, { label: 'Woman' }, { label: 'Celebrity' }]);
 });
 
 app.listen(port, () => console.log(`API Server listening on port ${port}`));
