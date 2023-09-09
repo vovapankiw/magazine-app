@@ -24,10 +24,12 @@ export const Landing = () => {
     <Paper sx={{ backgroundImage: `url(${Magazine})`, backgroundSize: 'cover' }}>
       <Box width="100%" height="100vh" display="flex" justifyContent="center" alignItems="center">
         <Head description="Welcome to Volo Magazine Archive" />
-        <Box>
+        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
           <Box display="flex" justifyContent="center" mb={2}>
-            <ImportContactsIcon />
-            <Typography pl={2}>Volo Magazines Archive</Typography>
+            <ImportContactsIcon fontSize="large" color="secondary" />
+            <Typography pl={2} variant="h4" color="secondary">
+              Magazine Mania
+            </Typography>
           </Box>
           <Box display="flex">
             <Box>

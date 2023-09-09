@@ -1,5 +1,7 @@
 import { ReactNode, createContext, useMemo, useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
+import CssBaseline from '@mui/material/CssBaseline';
+import GlobalStyles from '@mui/material/GlobalStyles';
 import { darkTheme, lightTheme } from '@/config';
 
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -23,7 +25,11 @@ export const ThemeCustomProvider = ({ children }: ThemeProviderProps) => {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <GlobalStyles styles={{ html: { WebkitFontSmoothing: 'auto' } }} />
+        {children}
+      </ThemeProvider>
     </ColorModeContext.Provider>
   );
 };

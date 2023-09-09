@@ -14,8 +14,8 @@ const HeaderWrapper = styled(Box)(({ theme }) => ({
   justifyContent: 'space-between',
   alignItems: 'center',
   background: theme.palette.background.default,
-  padding: '14px',
-  minHeight: '54px'
+  padding: '10px',
+  minHeight: '82px'
 }));
 
 const WelcomeText = styled(Typography)(({ theme }: { theme: Theme }) => ({
@@ -59,10 +59,10 @@ export const Header = ({ userName, onLogOut }: HeaderProps) => {
   };
 
   return (
-    <Box position="sticky" top="0" zIndex="2" minHeight="54px">
+    <Box position="sticky" top="0" zIndex="2">
       <HeaderWrapper>
         {renderLogoSection(isHome, userName)}
-        <NavGroup>
+        <NavGroup gap="15px">
           <HeaderLinks />
           <MaterialUISwitch
             checked={checked}

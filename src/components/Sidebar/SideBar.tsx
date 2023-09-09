@@ -97,8 +97,8 @@ export const SideBar = () => {
       <DrawerHeader>
         {open && (
           <Grid2 container>
-            <Typography variant="h6">Volo library</Typography>
-            <Typography variant="caption">Manage your library</Typography>
+            <Typography variant="h6">Magazine Mania</Typography>
+            <Typography variant="caption">A Close Look at Popular Titles</Typography>
           </Grid2>
         )}
         <IconButton onClick={handleDrawerState}>

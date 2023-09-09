@@ -20,10 +20,6 @@ export const HeaderLinks = () => {
     padding: '2px'
   }));
 
-  // const NavTitleText = styled('span')(() => ({
-  //   marginLeft: '6px'
-  // }));
-
   const HeaderButton = styled(Button)(({ theme }) => ({
     color: theme.palette.mode === 'dark' ? theme.palette.secondary.main : theme.palette.primary.main
   }));
@@ -41,7 +37,7 @@ export const HeaderLinks = () => {
           </HeaderButton>
         </Link>
       </LinkWrapper>
-      <LinkWrapper style={{ marginRight: 12 }}>
+      <LinkWrapper>
         <Link to="/settings">
           <HeaderButton>
             <Tooltip title="Manage your Libary settings">

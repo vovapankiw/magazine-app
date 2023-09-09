@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 type FormInputTextProps = {
   name: string;
   label: string;
-  rules: any;
+  rules: Record<string, string | number>;
 };
 
 export const FormInputText = ({ name, label, rules }: FormInputTextProps) => {
