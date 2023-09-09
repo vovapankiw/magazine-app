@@ -3,12 +3,17 @@ import { Autocomplete } from '../Autocomplete';
 
 type FormAutocompleteProps = {
   name: string;
-  getOptionLabel: ({ label }: { label: string }) => string;
+  getOptionLabel?: ({ label }: { label: string }) => string;
   label: string;
   url: string;
 };
 
-export const FormAutocomplete = ({ name, getOptionLabel, label, url }: FormAutocompleteProps) => {
+export const FormAutocomplete = ({
+  name,
+  getOptionLabel = (option) => option.label,
+  label,
+  url
+}: FormAutocompleteProps) => {
   const { control } = useFormContext();
 
   return (

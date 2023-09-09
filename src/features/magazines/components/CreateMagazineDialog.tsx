@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
-// import { Dayjs } from 'dayjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Alert,
@@ -14,7 +13,7 @@ import {
   DialogTitle,
   Snackbar
 } from '@mui/material';
-import { FormAutocomplete, FormInputDate, FormInputText } from '@/components/Form';
+import { FormAutocomplete, FormInputDate, FormInputImage, FormInputText } from '@/components/Form';
 import { FormInputNumber } from '@/components/Form/FormInputNumber';
 import { FREQUENCY } from '@/constants';
 
@@ -28,7 +27,7 @@ type IFormValue = {
   founded?: Date | null;
   final_issue?: Date | null;
   link?: string;
-  categories?: string;
+  categories: string;
 };
 
 const defaultValues: IFormValue = {
@@ -66,8 +65,8 @@ const schema = Yup.object().shape({
 
       return dateSchema;
     }),
-  link: Yup.string().label('Link').url()
-  // categories: Yup.string().label('Link').trim().required().min(10) // TODO enum
+  link: Yup.string().label('Link').url(),
+  categories: Yup.string().label('Categoty').trim().required()
 });
 
 type CreateMagazineDialogProps = {
@@ -93,71 +92,61 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
     shouldUnregister: false
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
+
+  const handleCloseDialog = () => {
+    handleClose();
+    reset();
+  };
+
   const onSubmit = async (formData: IFormValue) => {
     console.log(formData);
+    reset();
     await Promise.resolve(formData);
   };
 
   return (
     <>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleCloseDialog}>
         <FormProvider {...methods}>
-          <Box p={2}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <DialogTitle>Add new magazine</DialogTitle>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <DialogTitle>Add new magazine</DialogTitle>
 
-              <DialogContent>
-                <DialogContentText>
-                  <FormInputText name="name" label="Name*" />
+            <DialogContent>
+              <DialogContentText py={2} height="70vh">
+                <FormInputImage name="image" />
 
-                  <FormInputNumber name="circulation" label="Circulation*" />
+                <FormInputText name="name" label="Name*" />
 
-                  <FormAutocomplete
-                    name="country"
-                    label="Country*"
-                    getOptionLabel={(option) => option.label}
-                    url="/countries"
-                  />
+                <FormInputNumber name="circulation" label="Circulation*" />
 
-                  <FormAutocomplete
-                    name="language"
-                    label="Language*"
-                    getOptionLabel={(option) => option.label}
-                    url="/languages"
-                  />
+                <FormAutocomplete name="country" label="Country*" url="/countries" />
 
-                  <FormAutocomplete
-                    name="frequency"
-                    label="Frequency"
-                    getOptionLabel={(option) => option.label}
-                    url="/frequency"
-                  />
+                <FormAutocomplete name="language" label="Language*" url="/languages" />
 
-                  <Box mt={4} display="flex" gap="10px">
-                    <FormInputDate name="founded" label="Founded" />
-                    <FormInputDate name="final_issue" label="Final issue" />
-                  </Box>
+                <FormAutocomplete name="frequency" label="Frequency" url="/frequency" />
 
-                  <FormInputText name="link" label="Link" />
+                <Box mt={4} display="flex" gap="10px">
+                  <FormInputDate name="founded" label="Founded" />
+                  <FormInputDate name="final_issue" label="Final issue" />
+                </Box>
 
-                  <FormAutocomplete
-                    name="category"
-                    label="Category"
-                    getOptionLabel={(option) => option.label}
-                    url="/category"
-                  />
+                <FormInputText name="link" label="Link" />
 
-                  {/* <FormInputImage name="image" /> */}
-                </DialogContentText>
-              </DialogContent>
+                <FormAutocomplete
+                  name="categories"
+                  label="Category"
+                  getOptionLabel={(option) => option.label}
+                  url="/category"
+                />
+              </DialogContentText>
+            </DialogContent>
 
-              <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                <Button onClick={handleSubmit(onSubmit)}>Create</Button>
-              </DialogActions>
-            </form>
-          </Box>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={handleSubmit(onSubmit)}>Create</Button>
+            </DialogActions>
+          </form>
         </FormProvider>
       </Dialog>
       <Snackbar open={!!snackbarMessage} autoHideDuration={6000} onClose={closeSnackbar}>
