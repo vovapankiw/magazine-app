@@ -1,17 +1,15 @@
-import { useState } from 'react';
+import { useSnackbar } from 'notistack';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
-  Alert,
   Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
-  Snackbar
+  DialogTitle
 } from '@mui/material';
 import { FormAutocomplete, FormInputDate, FormInputImage, FormInputText } from '@/components/Form';
 import { FormInputNumber } from '@/components/Form/FormInputNumber';
@@ -75,15 +73,7 @@ type CreateMagazineDialogProps = {
 };
 
 export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialogProps) => {
-  const [snackbarMessage, setSnackbar] = useState('');
-
-  const closeSnackbar = () => {
-    // if (reason === 'clickaway') {
-    //   return;
-    // }
-
-    setSnackbar('');
-  };
+  const { enqueueSnackbar } = useSnackbar();
 
   const methods = useForm({
     mode: 'all',
@@ -92,11 +82,12 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
     shouldUnregister: false
   });
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit, reset, clearErrors } = methods;
 
   const handleCloseDialog = () => {
     handleClose();
     reset();
+    clearErrors();
   };
 
   const onSubmit = async (formData: IFormValue) => {
@@ -105,60 +96,55 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
     try {
       await Promise.resolve(formData);
       handleCloseDialog();
+      enqueueSnackbar(`Magazine ${formData.name} was created`, { variant: 'success' });
     } catch (e) {
       console.error(e);
+      enqueueSnackbar('Opps something went wrong!', { variant: 'error' });
     }
   };
 
   return (
-    <>
-      <Dialog open={open} onClose={handleCloseDialog}>
-        <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <DialogTitle>Add new magazine</DialogTitle>
+    <Dialog open={open} onClose={handleCloseDialog}>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogTitle>Add new magazine</DialogTitle>
 
-            <DialogContent>
-              <DialogContentText py={2} height="70vh">
-                <FormInputImage name="image" />
+          <DialogContent>
+            <DialogContentText py={2} height="70vh">
+              <FormInputImage name="image" />
 
-                <FormInputText name="name" label="Name*" />
+              <FormInputText name="name" label="Name*" />
 
-                <FormInputNumber name="circulation" label="Circulation*" />
+              <FormInputNumber name="circulation" label="Circulation*" />
 
-                <FormAutocomplete name="country" label="Country*" url="/countries" />
+              <FormAutocomplete name="country" label="Country*" url="/countries" />
 
-                <FormAutocomplete name="language" label="Language*" url="/languages" />
+              <FormAutocomplete name="language" label="Language*" url="/languages" />
 
-                <FormAutocomplete name="frequency" label="Frequency" url="/frequency" />
+              <FormAutocomplete name="frequency" label="Frequency" url="/frequency" />
 
-                <Box mt={4} display="flex" gap="10px">
-                  <FormInputDate name="founded" label="Founded" />
-                  <FormInputDate name="final_issue" label="Final issue" />
-                </Box>
+              <Box mt={4} display="flex" gap="10px">
+                <FormInputDate name="founded" label="Founded" />
+                <FormInputDate name="final_issue" label="Final issue" />
+              </Box>
 
-                <FormInputText name="link" label="Link" />
+              <FormInputText name="link" label="Link" type="url" />
 
-                <FormAutocomplete
-                  name="categories"
-                  label="Category"
-                  getOptionLabel={(option) => option.label}
-                  url="/category"
-                />
-              </DialogContentText>
-            </DialogContent>
+              <FormAutocomplete
+                name="categories"
+                label="Category"
+                getOptionLabel={(option) => option.label}
+                url="/category"
+              />
+            </DialogContentText>
+          </DialogContent>
 
-            <DialogActions>
-              <Button onClick={handleCloseDialog}>Cancel</Button>
-              <Button onClick={handleSubmit(onSubmit)}>Create</Button>
-            </DialogActions>
-          </form>
-        </FormProvider>
-      </Dialog>
-      <Snackbar open={!!snackbarMessage} autoHideDuration={6000} onClose={closeSnackbar}>
-        <Alert onClose={closeSnackbar} severity="error" sx={{ width: '100%' }}>
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
-    </>
+          <DialogActions>
+            <Button onClick={handleCloseDialog}>Cancel</Button>
+            <Button onClick={handleSubmit(onSubmit)}>Create</Button>
+          </DialogActions>
+        </form>
+      </FormProvider>
+    </Dialog>
   );
 };

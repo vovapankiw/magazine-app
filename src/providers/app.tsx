@@ -1,12 +1,12 @@
 import * as React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { HelmetProvider } from 'react-helmet-async';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
 
 import { Button, CircularProgress } from '@mui/material';
-// import { Notifications } from '@/components/Notifications/Notifications';
 // import { AuthProvider } from '@/lib/auth';
 import { queryClient } from '@/lib/react-query';
 
@@ -38,10 +38,11 @@ export const AppProvider = ({ children }: AppProviderProps) => (
       <HelmetProvider>
         <QueryClientProvider client={queryClient}>
           {process.env.NODE_ENV !== 'test' && <ReactQueryDevtools />}
-          {/* <Notifications /> */}
-          {/* <AuthProvider> */}
-          <Router>{children}</Router>
-          {/* </AuthProvider> */}
+          <SnackbarProvider maxSnack={3}>
+            {/* <AuthProvider> */}
+            <Router>{children}</Router>
+            {/* </AuthProvider> */}
+          </SnackbarProvider>
         </QueryClientProvider>
       </HelmetProvider>
     </ErrorBoundary>

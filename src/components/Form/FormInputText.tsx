@@ -4,24 +4,26 @@ import TextField from '@mui/material/TextField';
 type FormInputTextProps = {
   name: string;
   label: string;
+  type?: 'text' | 'url';
 };
 
-export const FormInputText = ({ name, label }: FormInputTextProps) => {
+export const FormInputText = ({ name, label, type = 'text' }: FormInputTextProps) => {
   const { control } = useFormContext();
+
   return (
     <Controller
       name={name}
       control={control}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <TextField
-          type="url"
+          type={type}
           helperText={error ? error.message : null}
+          error={!!error}
           autoFocus
           fullWidth
           multiline
           margin="dense"
           variant="standard"
-          error={!!error}
           onChange={onChange}
           value={value}
           label={label}

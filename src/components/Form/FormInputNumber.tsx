@@ -16,6 +16,7 @@ const NumericFormatCustom = forwardRef<NumericFormatProps, CustomProps>((props, 
       {...other}
       getInputRef={ref}
       onValueChange={(values: { value: string }) => {
+        console.log(values);
         onChange({
           target: {
             name: props.name,
@@ -43,12 +44,12 @@ export const FormInputNumber = ({ name, label }: FormInputNumberProps) => {
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <TextField
           helperText={error ? error.message : null}
+          error={!!error}
           autoFocus
           fullWidth
           multiline
           margin="dense"
           variant="standard"
-          error={!!error}
           onChange={onChange}
           value={value}
           label={label}
