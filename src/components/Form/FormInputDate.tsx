@@ -1,37 +1,39 @@
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 
-type FormInputDateProps = {
-  name: string;
+type FormInputDateProps<T extends FieldValues> = {
+  name: Path<T>;
   label: string;
+  control: Control<T>;
 };
 
-export const FormInputDate = ({ name, label }: FormInputDateProps) => {
-  const { control } = useFormContext();
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field, fieldState: { error } }) => (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            {...field}
-            label={label}
-            format="YYYY"
-            views={['year']}
-            disableFuture
-            slotProps={{
-              textField: {
-                variant: 'outlined',
+export const FormInputDate = <T extends FieldValues>({
+  name,
+  label,
+  control
+}: FormInputDateProps<T>) => (
+  <Controller
+    name={name}
+    control={control}
+    render={({ field, fieldState: { error } }) => (
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker
+          {...field}
+          label={label}
+          format="YYYY"
+          views={['year']}
+          disableFuture
+          slotProps={{
+            textField: {
+              variant: 'outlined',
 
-                error: !!error,
-                helperText: error?.message
-              }
-            }}
-          />
-        </LocalizationProvider>
-      )}
-    />
-  );
-};
+              error: !!error,
+              helperText: error?.message
+            }
+          }}
+        />
+      </LocalizationProvider>
+    )}
+  />
+);

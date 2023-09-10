@@ -1,17 +1,20 @@
 import { useState, useEffect, ChangeEvent } from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
 import { CardPreview } from '../CardPreview';
 
-type FormInputImageProps = {
-  name: string;
+type FormInputImageProps<T extends FieldValues> = {
+  name: Path<T>;
+  control: Control<T>;
 };
 
-export const FormInputImage = ({ name }: FormInputImageProps) => {
-  const { control } = useFormContext();
+export const FormInputImage = <T extends FieldValues>({
+  name,
+  control
+}: FormInputImageProps<T>) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
 

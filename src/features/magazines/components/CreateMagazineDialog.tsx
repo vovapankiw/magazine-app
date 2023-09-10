@@ -75,14 +75,14 @@ type CreateMagazineDialogProps = {
 export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialogProps) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const methods = useForm({
+  const methods = useForm<IFormValue>({
     mode: 'all',
     defaultValues,
     resolver: yupResolver(schema),
     shouldUnregister: false
   });
 
-  const { handleSubmit, reset, clearErrors } = methods;
+  const { handleSubmit, reset, clearErrors, control } = methods;
 
   const handleCloseDialog = () => {
     handleClose();
@@ -111,26 +111,42 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
 
           <DialogContent>
             <DialogContentText py={2} height="70vh">
-              <FormInputImage name="image" />
+              <FormInputImage name="image" control={control} />
 
-              <FormInputText name="name" label="Name*" />
+              <FormInputText name="name" label="Name*" control={control} />
 
-              <FormInputNumber name="circulation" label="Circulation*" />
-
-              <FormAutocomplete name="country" label="Country*" url="/countries" />
-
-              <FormAutocomplete name="language" label="Language*" url="/languages" />
-
-              <FormAutocomplete name="frequency" label="Frequency" url="/frequency" />
-
-              <Box mt={4} display="flex" gap="10px">
-                <FormInputDate name="founded" label="Founded" />
-                <FormInputDate name="final_issue" label="Final issue" />
-              </Box>
-
-              <FormInputText name="link" label="Link" type="url" />
+              <FormInputNumber name="circulation" label="Circulation*" control={control} />
 
               <FormAutocomplete
+                name="country"
+                label="Country*"
+                url="/countries"
+                control={control}
+              />
+
+              <FormAutocomplete
+                name="language"
+                label="Language*"
+                url="/languages"
+                control={control}
+              />
+
+              <FormAutocomplete
+                name="frequency"
+                label="Frequency"
+                url="/frequency"
+                control={control}
+              />
+
+              <Box mt={4} display="flex" gap="10px">
+                <FormInputDate name="founded" label="Founded" control={control} />
+                <FormInputDate name="final_issue" label="Final issue" control={control} />
+              </Box>
+
+              <FormInputText name="link" label="Link" type="url" control={control} />
+
+              <FormAutocomplete
+                control={control}
                 name="categories"
                 label="Category"
                 getOptionLabel={(option) => option.label}
