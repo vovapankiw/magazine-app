@@ -2,7 +2,19 @@ import { Avatar, Box, Link, Typography, styled } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const OwnerTitle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.secondary
+  color: theme.palette.text.secondary,
+  marginRight: '10px'
+}));
+
+const OwnerDescription = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.secondary,
+  textAlign: 'justify',
+  marginRight: '20px',
+  '&::first-letter': {
+    color: theme.palette.text.secondary,
+    initialLetter: '2 2',
+    paddingRight: '5px'
+  }
 }));
 
 const OwnerLink = styled(Typography)(({ theme }) => ({
@@ -19,9 +31,7 @@ export const MagazineOwner = ({ ownerDesc }: MagazineOwnerProps) => (
       About author
     </OwnerTitle>
     <Box sx={{ display: 'flex' }}>
-      <OwnerTitle variant="body2" sx={{ textAlign: 'justify', marginRight: '20px' }}>
-        {ownerDesc}
-      </OwnerTitle>
+      <OwnerDescription variant="body2">{ownerDesc}</OwnerDescription>
       <Avatar src="/broken-image.jpg" sx={{ width: 70, height: 70 }} />
     </Box>
     <Link href="/" underline="none">

@@ -9,7 +9,6 @@ const CustomizedTypography = styled(Typography)(({ theme }) => ({
   position: 'relative',
   padding: '10px',
   color: theme.palette.text.secondary,
-  backgroundColor: theme.palette.background.paper,
   '&.description--short': {
     overflow: 'hidden',
     maxHeight: '130px'
