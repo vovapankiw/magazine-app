@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ReactNode, Suspense } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { HelmetProvider } from 'react-helmet-async';
@@ -9,6 +9,7 @@ import { SnackbarProvider } from 'notistack';
 import { Button, CircularProgress } from '@mui/material';
 // import { AuthProvider } from '@/lib/auth';
 import { queryClient } from '@/lib/react-query';
+import { AuthProvider } from './auth-provider';
 
 const ErrorFallback = () => (
   <div
@@ -23,11 +24,11 @@ const ErrorFallback = () => (
 );
 
 type AppProviderProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export const AppProvider = ({ children }: AppProviderProps) => (
-  <React.Suspense
+  <Suspense
     fallback={
       <div className="flex items-center justify-center w-screen h-screen">
         <CircularProgress />
@@ -39,12 +40,12 @@ export const AppProvider = ({ children }: AppProviderProps) => (
         <QueryClientProvider client={queryClient}>
           {process.env.NODE_ENV !== 'test' && <ReactQueryDevtools />}
           <SnackbarProvider maxSnack={3}>
-            {/* <AuthProvider> */}
-            <Router>{children}</Router>
-            {/* </AuthProvider> */}
+            <AuthProvider>
+              <Router>{children}</Router>
+            </AuthProvider>
           </SnackbarProvider>
         </QueryClientProvider>
       </HelmetProvider>
     </ErrorBoundary>
-  </React.Suspense>
+  </Suspense>
 );

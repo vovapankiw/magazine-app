@@ -3,11 +3,11 @@ import { AppProvider, ThemeCustomProvider } from './providers';
 
 function App() {
   return (
-    <AppProvider>
-      <ThemeCustomProvider>
+    <ThemeCustomProvider>
+      <AppProvider>
         <AppRoutes />
-      </ThemeCustomProvider>
-    </AppProvider>
+      </AppProvider>
+    </ThemeCustomProvider>
   );
 }
 
