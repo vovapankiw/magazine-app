@@ -1,10 +1,10 @@
 import { Chip, Grid, Typography, styled } from '@mui/material';
 import { Magazine } from '@/api/magazine-api';
-import { MagazineSummury } from './Magazine-summury';
+import { MagazineSummury } from './MagazineSummury';
 import { HARDCODED_FEEDBACK, HARDCODED_OWNER_DESC, HARDCODED_SUMMURY } from '@/constants';
-import { MagazineProperties } from './Magazine-properties';
-import { MagazineOwner } from './Magazine-owner';
-import { MagazineFeedback } from './Magazine-feedback';
+import { MagazineProperties } from './MagazineProperties';
+import { MagazineOwner } from './MagazineOwner';
+import { MagazineFeedback } from './MagazineFeedback';
 
 const DescriptionTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary

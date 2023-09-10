@@ -7,7 +7,7 @@ import { useObserver } from '@/hooks/useObserver';
 import { MagazineGrid } from '../components/MagazineGrid';
 import { fetchMagazines } from '@/api/magazine-api';
 import { debounce } from '@/utils/debounce';
-import { AddMagazineButton } from '../components/Add-magazine-button';
+import { AddMagazineButton } from '../components/AddMagazineButton';
 import { CreateMagazineDialog } from '../components/CreateMagazineDialog';
 
 const HomeWrapper = styled(Box)`

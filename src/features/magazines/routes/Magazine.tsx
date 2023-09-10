@@ -4,8 +4,8 @@ import { Box, styled } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Spinner } from '@/components/Spinner';
 import { fetchMagazine } from '@/api/magazine-api';
-import { MagazinePreview } from '../components/Magazine-preview';
-import { MagazineDescription } from '../components/Magazine-description';
+import { MagazinePreview } from '../components/MagazinePreview';
+import { MagazineDescription } from '../components/MagazineDescription';
 import { Breadcrumbs } from '@/components/Bredcrumbs/Breadcrumbs';
 
 const MagazineBredcumbsWrapper = styled(Grid)(({ theme }) => ({
