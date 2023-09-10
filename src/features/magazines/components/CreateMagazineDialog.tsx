@@ -79,7 +79,7 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
     mode: 'all',
     defaultValues,
     resolver: yupResolver(schema),
-    shouldUnregister: false
+    shouldUnregister: true
   });
 
   const { handleSubmit, reset, clearErrors, control } = methods;
