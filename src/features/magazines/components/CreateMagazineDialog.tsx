@@ -46,21 +46,22 @@ const schema = Yup.object().shape({
   language: Yup.string().label('Language').trim().required(),
   // image: Yup.string().required(),
   frequency: Yup.string().label('Frequency').oneOf(FREQUENCY),
-  founded: Yup.date().label('Founded').nullable(),
+  founded: Yup.date().label('Founded').nullable().typeError('Invalid date'),
   final_issue: Yup.date()
     .label('Final issue')
     .nullable()
     .when('founded', (founded: Date[] | undefined | null, dateSchema) => {
-      const [dayJsDate] = founded || [];
+      const [date] = founded || [];
 
-      if (dayJsDate) {
-        const foundedYear = dayJsDate.getFullYear();
+      if (date && date instanceof Date && !Number.isNaN(date.valueOf())) {
+        const foundedYear = date.getFullYear();
 
         return dateSchema.min(foundedYear, 'Founded should be before Final issue');
       }
 
       return dateSchema;
-    }),
+    })
+    .typeError('Invalid date'),
   link: Yup.string().label('Link').url(),
   categories: Yup.string().label('Categoty').trim().required()
 });
@@ -144,7 +145,7 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
               />
             </Box>
 
-            <Box mt={4} display="flex" gap="10px">
+            <Box mt={4} display="flex" gap="10px" height="71px" flexBasis="50%">
               <FormInputDate name="founded" label="Founded" control={control} />
               <FormInputDate name="final_issue" label="Final issue" control={control} />
             </Box>
