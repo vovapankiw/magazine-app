@@ -1,7 +1,6 @@
 /* Big thanks for spinner to dev who wrote it (https://codepen.io/luisiniMagigi/pen/VwjbxgV?editors=0110) */
 import { FunctionComponent } from 'react';
 import { Container, styled } from '@mui/material';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { keyframes } from '@mui/system';
 import { shouldForwardProp } from '@/utils/custom-component-props';
 
@@ -181,8 +180,8 @@ const pageAnimations = n2A(18).map((i: number) => {
 });
 
 const Li = styled('li', {
-  shouldForwardProp: (prop) => shouldForwardProp<any>(['num'], prop)
-})<any>(({ num }: { num: number }) => ({
+  shouldForwardProp: (prop) => shouldForwardProp<Record<string, unknown>>(['num'], prop)
+})(({ num }: { num: number }) => ({
   height: '4px',
   borderRadius: '2px',
   transformOrigin: '100% 2px',

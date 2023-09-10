@@ -1,5 +1,4 @@
-/* eslint-disable */
-import Axios from 'axios';
+import Axios, { InternalAxiosRequestConfig } from 'axios';
 
 import { API_URL } from '@/config';
 // import { useNotificationStore } from '@/stores/notifications';
@@ -19,17 +18,16 @@ export const httpClient = Axios.create({
 });
 
 export const addAccessTokenInterceptor = (getAccessTokenSilently: () => Promise<string>) => {
-  httpClient.interceptors.request.use(async (config: any) => {
+  httpClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
+    const newConfig = { ...config };
     const token = await getAccessTokenSilently();
-    console.log('token', token);
-    config.headers.Authorization = `Bearer ${token}`;
-    return config;
+    newConfig.headers.Authorization = `Bearer ${token}`;
+    return newConfig;
   });
 };
 
 // axios.interceptors.request.use(authRequestInterceptor);
 // httpClient.interceptors.response.use(
-//   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
 //   (response) => response.data,
 //   (error) =>
 //     // const message = error.response?.data?.message || error.message;

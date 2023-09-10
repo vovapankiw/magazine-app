@@ -1,6 +1,5 @@
-/* eslint-disable */
-import { useNavigate, useParams } from 'react-router-dom';
-import { IconButton, ImageListItem, ImageListItemBar, Link } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { IconButton, ImageListItem, ImageListItemBar } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { Magazine } from '@/api/magazine-api';
 
@@ -18,6 +17,8 @@ export const MagazineItem = ({ magazine }: MagazineItemProp) => {
   return (
     <ImageListItem key={magazine.image} sx={{ minHeight: '245px' }}>
       <img
+        // TODO: Change to normal url when blob storage will be ready
+        // eslint-disable-next-line
         src={require(`../../../assets/images/${magazine.image}`)}
         height="245px"
         alt={magazine.name}

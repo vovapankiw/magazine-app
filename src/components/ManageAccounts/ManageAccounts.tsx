@@ -18,14 +18,11 @@ const StyledMenuItem = styled(MenuItem)`
   }
 `;
 
-interface Props {
-  avatar?: string;
-  name?: string;
+interface ManageAccountProps {
   logOut: () => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const ManageAccount = ({ avatar, name, logOut }: Props) => {
+export const ManageAccount = ({ logOut }: ManageAccountProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

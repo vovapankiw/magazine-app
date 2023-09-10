@@ -1,7 +1,9 @@
-import { forwardRef } from 'react';
+import { ElementType, forwardRef } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { NumericFormat, NumericFormatProps } from 'react-number-format';
+import { InputBaseComponentProps } from '@mui/material';
 import TextField from '@mui/material/TextField';
+import { IFormValue } from '@/features/magazines/components/CreateMagazineDialog';
 
 type CustomProps = {
   onChange: (event: { target: { name: string; value: string } }) => void;
@@ -31,12 +33,12 @@ const NumericFormatCustom = forwardRef<NumericFormatProps, CustomProps>((props, 
 });
 
 type FormInputNumberProps = {
-  name: string;
+  name: keyof IFormValue;
   label: string;
 };
 
 export const FormInputNumber = ({ name, label }: FormInputNumberProps) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext<IFormValue>();
   return (
     <Controller
       name={name}
@@ -54,7 +56,8 @@ export const FormInputNumber = ({ name, label }: FormInputNumberProps) => {
           value={value}
           label={label}
           InputProps={{
-            inputComponent: NumericFormatCustom as any
+            // issue: https://github.com/mui/material-ui/issues/32420 with forwardref type, we need type cast
+            inputComponent: NumericFormatCustom as unknown as ElementType<InputBaseComponentProps>
           }}
         />
       )}

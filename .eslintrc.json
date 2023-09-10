@@ -56,7 +56,7 @@
       }
     ],
     "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
-    "import/extensions": ["error", "never"],
+    "import/extensions": ["error", "never", { "svg": "always", "jpg": "always" }],
     "no-underscore-dangle": ["off"],
     "@typescript-eslint/no-misused-promises": [
       "error",

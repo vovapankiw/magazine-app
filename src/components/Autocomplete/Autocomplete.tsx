@@ -9,7 +9,7 @@ import { fetchOptions } from '@/api/autocomplete-api';
 type AutocompleteProps = {
   label: string;
   getOptionLabel: (option: { label: string }) => string;
-  field: { onChange: (...event: any[]) => void };
+  field: { onChange: (...event: (string | undefined)[]) => void };
   invalid: boolean;
   error: FieldError | undefined;
   url: string;

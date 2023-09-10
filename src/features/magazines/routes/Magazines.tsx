@@ -61,11 +61,14 @@ export const Magazines = () => {
     }
   }, [isVisible, fetchNextPage]);
 
-  const saveSearchValue = useCallback((searchQuery: string) => {
-    const sanitizedQuery = searchQuery.trim().toLowerCase();
-    const searchValueToUpdate = sanitizedQuery === '' ? undefined : sanitizedQuery;
-    setSearchValue(searchValueToUpdate);
-  }, []);
+  const saveSearchValue = useCallback(
+    (searchQuery: string) => {
+      const sanitizedQuery = searchQuery.trim().toLowerCase();
+      const searchValueToUpdate = sanitizedQuery === '' ? undefined : sanitizedQuery;
+      setSearchValue(searchValueToUpdate);
+    },
+    [setSearchValue]
+  );
 
   const debouncedSetSearchValue = useMemo(() => debounce(saveSearchValue, 500), [saveSearchValue]);
 

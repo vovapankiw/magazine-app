@@ -1,14 +1,15 @@
 import { Controller, useFormContext } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
+import { IFormValue } from '@/features/magazines/components/CreateMagazineDialog';
 
 type FormInputTextProps = {
-  name: string;
+  name: keyof IFormValue;
   label: string;
   type?: 'text' | 'url';
 };
 
 export const FormInputText = ({ name, label, type = 'text' }: FormInputTextProps) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext<IFormValue>();
 
   return (
     <Controller

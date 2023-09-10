@@ -5,7 +5,6 @@ import FlagIcon from '@mui/icons-material/Flag';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Head } from '@/components/Head';
-// eslint-disable-next-line import/extensions
 import Magazine from '@/assets/magazine-background.jpg';
 
 export const Landing = () => {

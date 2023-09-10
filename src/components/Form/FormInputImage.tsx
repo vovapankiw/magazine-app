@@ -32,14 +32,13 @@ export const FormInputImage = ({ name }: FormInputImageProps) => {
   useEffect(() => {
     if (!selectedFile) {
       setPreview(null);
-      return;
+      return undefined;
     }
 
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreview(objectUrl);
 
     // free memory when ever this component is unmounted
-    // eslint-disable-next-line consistent-return
     return () => {
       URL.revokeObjectURL(objectUrl);
     };

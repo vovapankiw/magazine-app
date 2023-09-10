@@ -69,7 +69,7 @@ export const Header = ({ userName, onLogOut }: HeaderProps) => {
             onChange={handleChange}
             inputProps={{ 'aria-label': 'controlled' }}
           />
-          <ManageAccount avatar="" name={userName} logOut={onLogOut} />
+          <ManageAccount logOut={onLogOut} />
         </NavGroup>
       </HeaderWrapper>
       <Divider orientation="horizontal" flexItem />

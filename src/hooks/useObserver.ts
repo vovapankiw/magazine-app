@@ -1,22 +1,34 @@
-/* eslint-disable */
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, RefObject } from 'react';
 
-export const useObserver = (options: any): any => {
-  const containerRef = useRef(null);
+type UseObserverProps = [RefObject<HTMLDivElement>, boolean];
+
+type OptionProps = {
+  root: null | HTMLElement;
+  rootMargin: string;
+  threshold: number;
+};
+
+export const useObserver = (options: OptionProps): UseObserverProps => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  const callbackFunction = (entries: any) => {
+  const callbackFunction = (entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
 
     setIsVisible(entry.isIntersecting);
   };
 
   useEffect(() => {
+    let observerRefValue: HTMLDivElement | null = null;
     const observer = new IntersectionObserver(callbackFunction, options);
-    if (containerRef.current) observer.observe(containerRef.current);
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+      observerRefValue = containerRef.current;
+    }
 
     return () => {
-      if (containerRef.current) observer.unobserve(containerRef.current);
+      if (observerRefValue) observer.unobserve(observerRefValue);
     };
   }, [containerRef, options]);
 

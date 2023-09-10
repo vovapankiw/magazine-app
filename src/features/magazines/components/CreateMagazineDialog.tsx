@@ -15,7 +15,7 @@ import { FormAutocomplete, FormInputDate, FormInputImage, FormInputText } from '
 import { FormInputNumber } from '@/components/Form/FormInputNumber';
 import { FREQUENCY } from '@/constants';
 
-type IFormValue = {
+export type IFormValue = {
   name: string;
   circulation: string;
   country: string;
