@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { InfiniteData } from '@tanstack/react-query';
 import { ImageList } from '@mui/material';
 import { MagazineItem } from './Magazine-item';
@@ -16,11 +17,11 @@ export const MagazineGrid = ({ data }: MagazineGridProps) => (
     }}
   >
     {data?.pages?.map((page) => (
-      <>
+      <Fragment key={page.nextPage}>
         {page.data.map((magazine: Magazine) => (
           <MagazineItem key={magazine.name} magazine={magazine} />
         ))}
-      </>
+      </Fragment>
     ))}{' '}
   </ImageList>
 );

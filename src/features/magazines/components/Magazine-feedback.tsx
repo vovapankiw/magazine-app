@@ -27,7 +27,7 @@ export const MagazineFeedback = ({ feedbackList }: MagazineFeedbackProps) => (
       Give a feedback
     </Button>
     {feedbackList.map((feedback) => (
-      <Feedback feedback={feedback} />
+      <Feedback key={feedback.id} feedback={feedback} />
     ))}
   </>
 );

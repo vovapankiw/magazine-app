@@ -25,7 +25,7 @@ export const Breadcrumbs = () => {
             {name.toLocaleUpperCase()}
           </Typography>
         ) : (
-          <BreadcrumbItem disableRipple onClick={() => navigate(routeTo)}>
+          <BreadcrumbItem key={name} disableRipple onClick={() => navigate(routeTo)}>
             {name}
           </BreadcrumbItem>
         );

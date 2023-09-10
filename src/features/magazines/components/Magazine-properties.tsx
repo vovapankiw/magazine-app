@@ -79,7 +79,7 @@ export const MagazineProperties = ({ magazine }: MagazinePropertiesProps) => {
           <Item />
         </Stack>
       </Wrapper>
-      <Button color="info" onClick={handleClick} sx={{ 'margin-top': '10px' }}>
+      <Button color="info" onClick={handleClick} sx={{ marginTop: '10px' }}>
         {isOpen ? 'Less details' : 'More details'}
       </Button>
     </>

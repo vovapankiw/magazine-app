@@ -44,7 +44,7 @@ export const MagazineSummury = ({ summury }: MagazineSummuryProps) => {
         {summury}
       </CustomizedTypography>
 
-      <Button onClick={handleClick} sx={{ 'margin-top': '10px' }} color="info">
+      <Button onClick={handleClick} color="info" sx={{ marginTop: '10px' }}>
         {isOpen ? 'Show less' : 'Show more'}
       </Button>
     </>
