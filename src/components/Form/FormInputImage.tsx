@@ -76,7 +76,7 @@ export const FormInputImage = <T extends FieldValues>({
             <IconButton
               component="label"
               onClick={removeImage}
-              sx={{ position: 'absolute', bottom: '10px', right: '50px' }}
+              sx={{ position: 'absolute', top: '10px', right: '10px' }}
             >
               <DeleteIcon sx={{ fill: '#1976d2 !important' }} />
             </IconButton>

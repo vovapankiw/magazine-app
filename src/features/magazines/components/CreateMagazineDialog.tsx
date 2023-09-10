@@ -2,15 +2,7 @@ import { useSnackbar } from 'notistack';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle
-} from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
 import {
   FormAutocomplete,
@@ -104,7 +96,6 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
       handleCloseDialog();
       enqueueSnackbar(`Magazine ${formData.name} was created`, { variant: 'success' });
     } catch (e) {
-      console.error(e);
       enqueueSnackbar('Opps something went wrong!', { variant: 'error' });
     }
   };
@@ -115,42 +106,54 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogTitle>Add new magazine</DialogTitle>
 
-          <DialogContent>
-            <DialogContentText py={2} height="70vh">
-              <FormInputImage name="image" control={control} />
+          <DialogContent sx={{ height: '70vh' }} dividers>
+            <FormInputImage name="image" control={control} />
 
+            <Box height="71px">
               <FormInputText name="name" label="Name*" control={control} />
+            </Box>
 
+            <Box height="71px">
               <FormInputNumber name="circulation" label="Circulation*" control={control} />
+            </Box>
 
+            <Box height="71px">
               <FormAutocomplete
                 name="country"
                 label="Country*"
                 url="/countries"
                 control={control}
               />
+            </Box>
 
+            <Box height="71px">
               <FormAutocomplete
                 name="language"
                 label="Language*"
                 url="/languages"
                 control={control}
               />
+            </Box>
 
+            <Box height="71px">
               <FormAutocomplete
                 name="frequency"
                 label="Frequency"
                 url="/frequency"
                 control={control}
               />
+            </Box>
 
-              <Box mt={4} display="flex" gap="10px">
-                <FormInputDate name="founded" label="Founded" control={control} />
-                <FormInputDate name="final_issue" label="Final issue" control={control} />
-              </Box>
+            <Box mt={4} display="flex" gap="10px">
+              <FormInputDate name="founded" label="Founded" control={control} />
+              <FormInputDate name="final_issue" label="Final issue" control={control} />
+            </Box>
 
+            <Box height="71px">
               <FormInputText name="link" label="Link" type="url" control={control} />
+            </Box>
 
+            <Box height="71px">
               <FormAutocomplete
                 control={control}
                 name="categories"
@@ -158,10 +161,10 @@ export const CreateMagazineDialog = ({ open, handleClose }: CreateMagazineDialog
                 getOptionLabel={(option) => option.label}
                 url="/category"
               />
-            </DialogContentText>
+            </Box>
           </DialogContent>
 
-          <DialogActions>
+          <DialogActions sx={{ padding: '10px' }}>
             <Button onClick={handleCloseDialog}>Cancel</Button>
             <Button onClick={handleSubmit(onSubmit)}>Create</Button>
           </DialogActions>
