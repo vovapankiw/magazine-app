@@ -1,7 +1,9 @@
 import { Chip, Grid, Typography, styled } from '@mui/material';
-import { Magazine } from '@/api/magazine-api';
-import { MagazineSummury } from './MagazineSummury';
+
 import { HARDCODED_FEEDBACK, HARDCODED_OWNER_DESC, HARDCODED_SUMMURY } from '@/constants';
+
+import { Magazine } from '../api';
+import { MagazineSummury } from './MagazineSummury';
 import { MagazineProperties } from './MagazineProperties';
 import { MagazineOwner } from './MagazineOwner';
 import { MagazineFeedback } from './MagazineFeedback';

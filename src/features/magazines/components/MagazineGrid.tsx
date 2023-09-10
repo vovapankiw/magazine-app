@@ -1,8 +1,9 @@
 import { Fragment } from 'react';
 import { InfiniteData } from '@tanstack/react-query';
 import { ImageList } from '@mui/material';
+
+import { IPaginate, Magazine } from '../api';
 import { MagazineItem } from './MagazineItem';
-import { IPaginate, Magazine } from '@/api/magazine-api';
 
 type MagazineGridProps = {
   data: InfiniteData<IPaginate<Magazine[]>> | undefined;

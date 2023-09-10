@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { IconButton, ImageListItem, ImageListItemBar } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import { Magazine } from '@/api/magazine-api';
+
+import { Magazine } from '../api';
 
 type MagazineItemProp = {
   magazine: Magazine;

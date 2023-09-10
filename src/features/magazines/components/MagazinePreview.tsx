@@ -2,7 +2,8 @@ import { useSnackbar } from 'notistack';
 import { Chip, Grid } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-import { Magazine } from '@/api/magazine-api';
+
+import { Magazine } from '../api';
 
 type MagazinePreviewProps = {
   magazine: Magazine;

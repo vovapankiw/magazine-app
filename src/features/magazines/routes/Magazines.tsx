@@ -4,11 +4,12 @@ import { Box, styled } from '@mui/material';
 import { QueryFunctionContext, useInfiniteQuery } from '@tanstack/react-query';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { useObserver } from '@/hooks/useObserver';
-import { MagazineGrid } from '../components/MagazineGrid';
-import { fetchMagazines } from '@/api/magazine-api';
 import { debounce } from '@/utils/debounce';
+import { MagazineGrid } from '../components/MagazineGrid';
 import { AddMagazineButton } from '../components/AddMagazineButton';
 import { CreateMagazineDialog } from '../components/CreateMagazineDialog';
+
+import { fetchMagazines } from '../api';
 
 const HomeWrapper = styled(Box)`
   display: flex;

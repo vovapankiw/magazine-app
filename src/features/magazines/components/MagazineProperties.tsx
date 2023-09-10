@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Box, Button, Link, Stack, Typography, styled } from '@mui/material';
-import { Magazine } from '@/api/magazine-api';
-import { Divider } from '@/components/Divider';
+
+import { Divider } from '@/components';
+
+import { Magazine } from '../api';
 
 const Item = styled(Box)`
   display: flex;

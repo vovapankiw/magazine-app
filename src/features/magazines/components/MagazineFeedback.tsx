@@ -1,6 +1,7 @@
 import { Button, Rating, Typography, Box, styled } from '@mui/material';
+
 import { Feedback as IFeedback } from '@/types';
-import { Feedback } from '@/components/Feedback';
+import { Feedback } from '@/components';
 
 const FeedbackTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary

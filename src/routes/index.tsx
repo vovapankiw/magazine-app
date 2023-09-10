@@ -1,13 +1,13 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
-
 import { useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/material';
+
+import { FallBack, Spinner } from '@/components';
+import { Landing } from '../features/misc';
 import { protectedRoutes } from './protected';
 import { publicRoutes } from './public';
-import { Landing } from '../features/misc';
-import { Spinner } from '../components/Spinner';
 
 export const AppRoutes = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -23,9 +23,9 @@ export const AppRoutes = () => {
 
   if (isLoading) {
     return (
-      <Box height="100vh" width="100%" display="flex" justifyContent="center" alignItems="center">
+      <FallBack>
         <Spinner />
-      </Box>
+      </FallBack>
     );
   }
 

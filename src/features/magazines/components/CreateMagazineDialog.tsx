@@ -11,8 +11,14 @@ import {
   DialogContentText,
   DialogTitle
 } from '@mui/material';
-import { FormAutocomplete, FormInputDate, FormInputImage, FormInputText } from '@/components/Form';
-import { FormInputNumber } from '@/components/Form/FormInputNumber';
+
+import {
+  FormAutocomplete,
+  FormInputDate,
+  FormInputImage,
+  FormInputText,
+  FormInputNumber
+} from '@/components/Form';
 import { FREQUENCY } from '@/constants';
 
 export type IFormValue = {

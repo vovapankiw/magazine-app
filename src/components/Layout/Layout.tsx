@@ -9,7 +9,7 @@ const Content = styled(Box)(({ theme }) => ({
   background: theme.palette.background.default
 }));
 
-const Layout = () => {
+export const Layout = () => {
   const { logout } = useAuth0();
 
   return (
@@ -32,5 +32,3 @@ const Layout = () => {
     </Content>
   );
 };
-
-export default Layout;

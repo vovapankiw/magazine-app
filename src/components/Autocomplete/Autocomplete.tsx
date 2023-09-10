@@ -4,7 +4,7 @@ import { FieldError } from 'react-hook-form';
 import AutocompleteMui from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
-import { fetchOptions } from '@/api/autocomplete-api';
+import { fetchOptions } from '@/features/magazines/api/autocomplete-api';
 
 type AutocompleteProps = {
   label: string;

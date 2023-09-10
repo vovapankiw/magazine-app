@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { lazyImport } from '@/utils/lazy-import';
-import Layout from '@/components/Layout/Layout';
+import { Layout } from '@/components';
 
 const { MagazinesRoutes } = lazyImport(() => import('@/features/magazines'), 'MagazinesRoutes');
 const { DashboardRoutes } = lazyImport(() => import('@/features/dashboard'), 'DashboardRoutes');
